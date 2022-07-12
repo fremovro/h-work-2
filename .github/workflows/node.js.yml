@@ -23,5 +23,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --environment=production
+    - run: npm run build --environment=ci
     - run: sh ./scripts/deploy-to-gh-pages.sh

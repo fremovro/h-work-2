@@ -44,8 +44,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/h-work-2/';
   }
 
+  if (environment === 'ci') {
+    ENV.rootURL = '/h-work-2/';
+  }
+  
   return ENV;
 };
