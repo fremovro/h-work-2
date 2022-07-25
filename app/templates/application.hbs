@@ -1,4 +1,4 @@
-<header class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+<header class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand">
         <img width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
         Книжный клуб
@@ -8,17 +8,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="nav navbar-nav navigation-main">
-            <li class="nav-item active">
-                <a class="nav-link">Рабочий стол <span class="sr-only">(текущий)</span></a>
+            <li class="nav-item">
+                {{#link-to "index" class="nav-link"}}Рабочий стол{{/link-to}}
             </li>
             <li class="nav-item">
-                <a class="nav-link" >Встречи клуба</a>
+                <a class="nav-link" href="">Встречи клуба</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Книги</a>
+                {{#link-to "books" class="nav-link"}}Книги{{/link-to}}
             </li>
             <li class="nav-item">
-                <a class="nav-link">Спикеры</a>
+                {{#link-to "books" class="nav-link"}}Спикеры{{/link-to}}
             </li>
             <li class="nav-item">
                 <a class="nav-link text-success" href="#">Оставить заявку</a>
@@ -38,9 +38,9 @@
     </div>
 </header>
 
-<main role="main" class="inner cover sticky-top">
+<div class="container h-100">
     {{outlet}}
-</main>
+</div>
 
 <footer class="footer">
     <div class="container">

@@ -1,0 +1,53 @@
+{
+  "db_books": [
+    {
+      "id": 1,
+      "name": "Игрок",
+      "author": "Фёдор Достоевский",
+      "size": "223",
+      "description": "https://www.litres.ru/fedor-dostoevskiy/igrok-5004024/"
+    },
+    {
+      "id": 2,
+      "name": "Колыбельная",
+      "author": "Чак Паланик",
+      "size": "541",
+      "description": "https://www.litres.ru/chak-palanik/kolybelnaya/"
+    },
+    {
+      "id": 3,
+      "name": "Мы",
+      "author": "Евгений замятин",
+      "size": "221",
+      "description": "https://www.litres.ru/evgeniy-zamyatin/my-7444105/"
+    },
+    {
+      "name": "житуха",
+      "author": "чак норис",
+      "size": "66",
+      "description": "описание",
+      "id": 4
+    },
+    {
+      "name": "жир",
+      "author": "кристина",
+      "size": "1",
+      "description": "описание",
+      "id": 5
+    },
+    {
+      "name": "malina1",
+      "author": "кристина",
+      "size": "1",
+      "description": "описание",
+      "id": 6
+    }
+  ],
+  "db_speakers": [
+    {
+      "id": 1,
+      "name": "Роман",
+      "surname": "Ефремов"
+    }
+  ]
+}

@@ -4,7 +4,8 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'h-work-2',
     environment,
-    rootURL: '/h-work-2/',
+    backendURL: 'http://localhost:3000',
+    rootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
