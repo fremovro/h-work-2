@@ -6,7 +6,6 @@ export default Controller.extend({
 
     actions: {
         editBook(idBook) {
-            console.log(parseInt(idBook)+' '+this.get('bookName'));
             this.get("dataService").editBook({
                 id: parseInt(idBook),
                 name: this.get('bookName'),
@@ -14,7 +13,7 @@ export default Controller.extend({
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
             })
-            this.transitionToRoute('books');
+            // this.transitionToRoute('books');
         }
     }
 });

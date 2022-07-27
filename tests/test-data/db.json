@@ -5,42 +5,24 @@
       "name": "Игрок",
       "author": "Фёдор Достоевский",
       "size": "223",
-      "description": "https://www.litres.ru/fedor-dostoevskiy/igrok-5004024/"
+      "description": "https://www.litres.ru/fedor-dostoevskiy/igrok-5004024/",
+      "tags": [1,2]
     },
     {
       "id": 2,
       "name": "Колыбельная",
       "author": "Чак Паланик",
       "size": "541",
-      "description": "https://www.litres.ru/chak-palanik/kolybelnaya/"
+      "description": "https://www.litres.ru/chak-palanik/kolybelnaya/",
+      "tags": [1,2,3]
     },
     {
       "id": 3,
       "name": "Мы",
       "author": "Евгений замятин",
       "size": "221",
-      "description": "https://www.litres.ru/evgeniy-zamyatin/my-7444105/"
-    },
-    {
-      "name": "житуха",
-      "author": "чак норис",
-      "size": "66",
-      "description": "описание",
-      "id": 4
-    },
-    {
-      "name": "жир",
-      "author": "кристина",
-      "size": "1",
-      "description": "описание",
-      "id": 5
-    },
-    {
-      "name": "malina1",
-      "author": "кристина",
-      "size": "1",
-      "description": "описание",
-      "id": 6
+      "description": "https://www.litres.ru/evgeniy-zamyatin/my-7444105/",
+      "tags": [2]
     }
   ],
   "db_speakers": [
@@ -48,6 +30,25 @@
       "id": 1,
       "name": "Роман",
       "surname": "Ефремов"
+    },
+    {
+      "id": 2,
+      "name": "Кристина",
+      "surname": "Ласюкова"
+    }
+  ],
+  "db_tags": [
+    {
+      "id": 1,
+      "tagname": "роман"
+    },
+    {
+      "id": 2,
+      "tagname": "бестселлер"
+    },
+    {
+      "id": 3,
+      "tagname": "зарубежное"
     }
   ]
 }

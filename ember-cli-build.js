@@ -1,6 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
@@ -22,6 +23,12 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+  app.import('vendor/tagsinput.css');
 
-  return app.toTree();
+  const jsFiles = funnel('vendor', {
+    files: ['popper.min.js', 'tagsinput.js'],
+    destDir: 'js'
+  });
+
+  return app.toTree(jsFiles);
 };

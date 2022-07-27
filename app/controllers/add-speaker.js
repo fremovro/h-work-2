@@ -5,12 +5,10 @@ export default Controller.extend({
     dataService: service('data'),
 
     actions: {
-        addBook() {
-            this.get("dataService").createBook({
-                name: this.get('bookName'),
-                author: this.get('bookAuthor'),
-                size: this.get('bookSize'),
-                description: this.get('bookDescription'),
+        addSpeaker() {
+            this.get("dataService").createSpeaker({
+                name: this.get('speakerName'),
+                surname: this.get('speakerSurname'),
             })
             // this.transitionToRoute('books');
         }
