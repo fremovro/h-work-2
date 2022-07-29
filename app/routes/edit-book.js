@@ -5,6 +5,7 @@ export default Route.extend({
     dataService: service('data'),
 
     model({ id }) {
+        console.log(window.location.href );
         return this.get("dataService").get_book(id);
     }
 });

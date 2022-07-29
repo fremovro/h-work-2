@@ -26,7 +26,7 @@ module.exports = function(defaults) {
   app.import('vendor/tagsinput.css');
 
   const jsFiles = funnel('vendor', {
-    files: ['popper.min.js', 'tagsinput.js'],
+    files: ['popper.min.js', 'tagsinput.js', 'bootstrap-file.js'],
     destDir: 'js'
   });
 
