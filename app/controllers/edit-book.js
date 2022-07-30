@@ -6,17 +6,19 @@ export default Controller.extend({
 
     actions: {
         editBook(idBook) {
+            let tagsInput=document.getElementById('tagsInput');
+            let tags = [];
+            for(var i=0;i<tagsInput.childElementCount-1;i++){
+                tags[i] = tagsInput.children[i].id;
+            }
             this.get("dataService").editBook({
                 id: parseInt(idBook),
                 name: this.get('bookName'),
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
+                tags: tags,
             })
-            // this.transitionToRoute('books');
         },
-        check(){
-            alert('da');
-        }
     }
 });

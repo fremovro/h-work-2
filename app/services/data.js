@@ -8,6 +8,7 @@ export default Service.extend({
         this.set('books', A());
         this.set('speakers', A());
         this.set('tags', A());
+        this.set('tagSearch', "");
     },
 
     async get_books(search) {
@@ -104,5 +105,12 @@ export default Service.extend({
             'Content-Type': 'application/json'
             }
         });
+    },
+
+    setTagSearch(searchTag) {
+        if(searchTag) this.set('searchTag', searchTag);
+        else this.set('searchTag', "");
+        if()
+        console.log(this.get('searchTag'));
     }
 });
