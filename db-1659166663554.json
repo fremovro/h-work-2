@@ -6,7 +6,9 @@
       "author": "Фёдор Достоевский",
       "size": "223",
       "description": "https://www.litres.ru/fedor-dostoevskiy/igrok-5004024/",
-      "tags": ["роман"]
+      "tags": [
+        "роман"
+      ]
     },
     {
       "id": 2,
@@ -14,7 +16,11 @@
       "author": "Чак Паланик",
       "size": "541",
       "description": "https://www.litres.ru/chak-palanik/kolybelnaya/",
-      "tags": ["роман","зарубежное","бестселлер"]
+      "tags": [
+        "роман",
+        "зарубежное",
+        ",бестселлер"
+      ]
     },
     {
       "id": 3,
@@ -22,7 +28,10 @@
       "author": "Евгений замятин",
       "size": "221",
       "description": "https://www.litres.ru/evgeniy-zamyatin/my-7444105/",
-      "tags": ["роман","антиутопия"]
+      "tags": [
+        "роман",
+        "антиутопия"
+      ]
     }
   ],
   "db_speakers": [

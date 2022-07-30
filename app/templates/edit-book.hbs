@@ -37,16 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="inputTags" class="col-sm-2 col-form-label text-right">Теги</label>
-            <div class="col-sm-10">
-                <!-- <input type="text" class="form-control" id="inputPatronymic" placeholder="#Теги через запятую"> -->
-                <select multiple="multiple" data-role="tagsinput" style="display: none;" id="inputTags">
-                    <option value="суперкнига" selected="selected">суперкнига</option>
-                    <option value="программирование" selected="selected">программирование</option>
-                </select>
-            </div>
-        </div>
+        {{edit-tags book=model}}
         <div class="form-group row">
             <div class="col-12 text-right">
                 {{#link-to "books"}}<button type="button" class="btn btn-primary btn-lg" onclick={{action "editBook" model.id}}>Сохранить</button>{{/link-to}}

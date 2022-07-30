@@ -14,6 +14,9 @@ export default Controller.extend({
                 description: this.get('bookDescription'),
             })
             // this.transitionToRoute('books');
+        },
+        check(){
+            alert('da');
         }
     }
 });

@@ -29,6 +29,10 @@ module.exports = function(defaults) {
     files: ['popper.min.js', 'tagsinput.js', 'bootstrap-file.js'],
     destDir: 'js'
   });
+  const jqueryFiles = funnel('node_modules/blueimp-file-upload/js', {
+    files: ['**/*.js'],
+    destDir: 'js'
+  });
 
-  return app.toTree(jsFiles);
+  return app.toTree(jsFiles, jqueryFiles);
 };

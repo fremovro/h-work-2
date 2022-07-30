@@ -8,7 +8,11 @@
             <li class="list-group-item">
                 <div><strong>Автор</strong>: {{book.author}}</div>
                 <div><strong>Количество страниц</strong>: {{book.size}}</div>
-                {{input-tags book=book}}
+                <div><strong>Теги</strong>: 
+                    {{#each book.tags as |tag|}}
+                        <a href="#" class="tag-link"><span class="small">#{{tag}}</span></a>
+                    {{/each}}
+                </div>
             </li>
             <li class="list-group-item">
                 <div class="row">
