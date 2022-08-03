@@ -8,14 +8,20 @@ export default Service.extend({
         this.set('books', A());
         this.set('speakers', A());
         this.set('tags', A());
-        this.set('tagSearch', "");
     },
 
-    async get_books(search) {
-        var query='';
-        if(search){
-            query = `?q=${search}`;
+    async getBooks(search, tagsSearch) {
+        var query = '';
+        if(search || tagsSearch){
+            if(search && tagsSearch){
+                query = `?q=${search}&tags_like=${tagsSearch}`;
+            }
+            else{
+                if(search) query = `?q=${search}`;
+                else query = `?tags_like=${tagsSearch}`;
+            }
         }
+        else query = '';
         let response = await fetch(`${ENV.backendURL}/db_books${query}`);
         let books = await response.json();
         this.get('books').clear();
@@ -23,8 +29,10 @@ export default Service.extend({
         return this.get('books');
     },
 
-    async get_speakers() {
-        let response = await fetch(`${ENV.backendURL}/db_speakers`);
+    async getSpeakers(search) {
+        var query = '';
+        if(search) query = `?q=${search}`;
+        let response = await fetch(`${ENV.backendURL}/db_speakers${query}`);
         let speakers = await response.json();
         this.get('speakers').clear();
         this.get('speakers').pushObjects(speakers);
@@ -43,11 +51,11 @@ export default Service.extend({
         return this.get('tags').find((tag) => tag.id === parseInt(id));
     },
 
-    get_book(id) {
+    getBook(id) {
         return this.get('books').find((book) => book.id === parseInt(id));
     },
 
-    get_speaker(id) {
+    getSpeaker(id) {
         return this.get('speakers').find((speaker) => speaker.id === parseInt(id));
     },
     
@@ -83,10 +91,29 @@ export default Service.extend({
         });
     },
 
-    editBook(book) {
+    async editBook(book, uploadData) {
         this.get('books').removeObject(this.get('books').find((temp) => temp.id === parseInt(book.id)));
         this.get('books').pushObject(book);
-        return fetch(`${ENV.backendURL}/db_books/${book.id}`, {
+        if(uploadData) {
+            uploadData.url = `${ENV.backendURL}/FileUpload`;
+            uploadData.submit().done(async (result/*, textStatus, jqXhr*/) => {
+                const dataToUpload = {
+                    entityName: 'db_books',
+                    id: book.id,
+                    fileName: result.filename
+                };
+                
+                await fetch(`${ENV.backendURL}/saveURL`, {
+                    method: 'POST',
+                    body: JSON.stringify(dataToUpload),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            });
+        }
+        
+        return await fetch(`${ENV.backendURL}/db_books/${book.id}`, {
             method: 'PATCH',
             body: JSON.stringify(book),
             headers: {
@@ -106,11 +133,4 @@ export default Service.extend({
             }
         });
     },
-
-    setTagSearch(searchTag) {
-        if(searchTag) this.set('searchTag', searchTag);
-        else this.set('searchTag', "");
-        if()
-        console.log(this.get('searchTag'));
-    }
 });

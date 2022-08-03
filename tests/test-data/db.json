@@ -9,19 +9,21 @@
       "tags": [
         "роман",
         "классика"
-      ]
+      ],
+      "coverURL": "/uploads/cover1__w340-1659524528868.jpg"
     },
     {
       "id": 2,
       "name": "Колыбельная",
       "author": "Чак Паланик",
-      "size": "541",
+      "size": "317",
       "description": "https://www.litres.ru/chak-palanik/kolybelnaya/",
       "tags": [
         "роман",
         "зарубежное",
         "18+"
-      ]
+      ],
+      "coverURL": "/uploads/large_uk403721-1659524542515.jpg"
     },
     {
       "id": 3,
@@ -31,34 +33,24 @@
       "description": "https://www.litres.ru/evgeniy-zamyatin/my-7444105/",
       "tags": [
         "роман",
-        "антиутопия"
-      ]
+        "антиутопия",
+        "классика"
+      ],
+      "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1659524560203.jpg"
     }
   ],
   "db_speakers": [
     {
       "id": 1,
       "name": "Роман",
-      "surname": "Ефремов"
+      "surname": "Ефремов",
+      "patronymic": "Сергеевич"
     },
     {
       "id": 2,
       "name": "Кристина",
-      "surname": "Ласюкова"
-    }
-  ],
-  "db_tags": [
-    {
-      "id": 1,
-      "tagname": "роман"
-    },
-    {
-      "id": 2,
-      "tagname": "бестселлер"
-    },
-    {
-      "id": 3,
-      "tagname": "зарубежное"
+      "surname": "Ласюкова",
+      "patronymic": "Александровна"
     }
   ]
 }

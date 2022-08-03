@@ -5,13 +5,15 @@ export default Controller.extend({
     dataService: service('data'),
 
     actions: {
-        editSpeaker(idSpeaker) {
-            this.get("dataService").editSpeaker({
+        async editSpeaker(idSpeaker) {
+            await this.get("dataService").editSpeaker({
                 id: parseInt(idSpeaker),
                 name: this.get('speakerName'),
                 surname: this.get('speakerSurname'),
+                patronymic: this.get('speakerPatronymic'),
             })
-            // this.transitionToRoute('books');
+            this.set('speakerName'); this.set('speakerSurname'); this.set('speakerPatronymic');
+            this.transitionToRoute('speakers');
         }
     }
 });

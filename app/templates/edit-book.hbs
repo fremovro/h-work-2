@@ -27,20 +27,12 @@
         </div>
         <div class="form-group row">
             <label for="customFile" class="col-sm-2 col-form-label text-right">Обложка</label>
-            <div class="input-group input-group-lg col-sm-10">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" lang="ru">
-                    <label class="custom-file-label form-control-lg placeholder-color" for="customFile" data-browse="Выбрать">Выберите файл</label>
-                </div>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary custom-file-clear" type="button" disabled="disabled">X</button>
-                </div>
-            </div>
+            {{input-file class="input-group input-group-lg col-sm-10" uploadData=uploadData uploadDataChanged=(action "changeUploadData")}}
         </div>
         {{edit-tags book=model}}
         <div class="form-group row">
             <div class="col-12 text-right">
-                {{#link-to "books"}}<button type="button" class="btn btn-primary btn-lg" onclick={{action "editBook" model.id}}>Сохранить</button>{{/link-to}}
+                <button type="button" class="btn btn-primary btn-lg" onclick={{action "editBook" model.id}}>Сохранить</button>
                 {{#link-to "books" class="btn btn-outline-secondary btn-lg"}}Отмена{{/link-to}}
             </div>
         </div>

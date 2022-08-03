@@ -5,14 +5,15 @@ export default Controller.extend({
     dataService: service('data'),
 
     actions: {
-        addBook() {
-            this.get("dataService").createBook({
+        async addBook() {
+            await this.get("dataService").createBook({
                 name: this.get('bookName'),
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
+                coverURL: "images/book-cover.jpg",
             })
-            // this.transitionToRoute('books');
+            this.transitionToRoute('books');
         }
     }
 });

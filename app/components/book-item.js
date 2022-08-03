@@ -13,7 +13,6 @@ export default Component.extend({
 
         async deleteBook(book) {
             await this.get('dataService').deleteBook(book);
-            // this.transitionToRoute('books');
         },
     }
 });

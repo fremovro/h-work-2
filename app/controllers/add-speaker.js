@@ -5,12 +5,13 @@ export default Controller.extend({
     dataService: service('data'),
 
     actions: {
-        addSpeaker() {
-            this.get("dataService").createSpeaker({
+        async addSpeaker() {
+            await this.get("dataService").createSpeaker({
                 name: this.get('speakerName'),
                 surname: this.get('speakerSurname'),
-            })
-            // this.transitionToRoute('books');
+                patronymic: this.get('speakerPatronymic'),
+            });
+            this.transitionToRoute('speakers');
         }
     }
 });
