@@ -9,16 +9,16 @@
             {{/link-to}}
         </div>
         <div class="col-md-auto">
-            <form class="form-inline">
+            <div class="form-inline">
             {{input class="form-control mr-2 search-long" type="search" aria-label="Найти по полям" value=search}}
-            <button class="btn btn-primary my-2" type="submit">Найти</button>
-            </form>
+            <button class="btn btn-primary my-2" onclick={{action "updatePage"}}>Найти</button>
+            </div>
         </div>
         <div class="col-md-auto">
-            <form class="form-inline">
+            <div class="form-inline">
             {{input class="form-control mr-2" type="search" aria-label="Найти по тегам" value=tags}}   
-            <button class="btn btn-primary my-2" type="submit">Поиск</button>
-            </form>
+            <button class="btn btn-primary my-2" onclick={{action "updatePage"}}>Поиск</button>
+            </div>
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 fix-margin">

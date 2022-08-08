@@ -7,5 +7,8 @@ export default Controller.extend({
     search: '',
     tags: '',
     actions: {
+        updatePage() {
+            location.reload();
+        }
     }
 });

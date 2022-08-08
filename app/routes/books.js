@@ -6,10 +6,10 @@ import { later } from '@ember/runloop';
 export default Route.extend({
     queryParams: {
         search: {
-            refreshModel: true,
+            refreshModel: false,
         },
         tags: {
-            refreshModel: true,
+            refreshModel: false,
         }
     },
 
@@ -24,13 +24,13 @@ export default Route.extend({
                 later(async () => {
                     let books = await this.get("dataService").getBooks(search, tags);
                     resolve(books);
-                }, 0);
+                }, 1500);
             });
         }
     },
     actions: {
-        loading(transition, originRoute) {
-            return false;
-        }
+        // loading(transition, originRoute) {
+        //     return false;
+        // }
     }
 });

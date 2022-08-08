@@ -69,26 +69,17 @@ export default Service.extend({
         return fetch(`${ENV.backendURL}/db_speakers/${speaker.id}`, { method: 'DELETE'});
     },
 
-    createBook(book) {
+    async createBook(book) {
         this.get('books').pushObject(book);
-        return fetch(`${ENV.backendURL}/db_books`, {
+        let response = await fetch(`${ENV.backendURL}/db_books`, {
             method: 'POST',
             body: JSON.stringify(book),
             headers: {
             'Content-Type': 'application/json'
             }
         });
-    },
-
-    createSpeaker(speaker) {
-        this.get('speakers').pushObject(speaker);
-        return fetch(`${ENV.backendURL}/db_speakers`, {
-            method: 'POST',
-            body: JSON.stringify(speaker),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        });
+        // let response = await fetch(`${ENV.backendURL}/db_books/?name_like=${book.name}&author_like=${book.author}`);
+        return await response.json();
     },
 
     async editBook(book, uploadData) {
