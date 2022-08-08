@@ -9,10 +9,10 @@
             {{/link-to}}
         </div>
         <div class="col-md-auto">
-            <form class="form-inline">
+            <div class="form-inline">
                 {{input class="form-control mr-2 search-long search-only" type="search" placeholder="ФИО" aria-label="Спикер" value=search}}
-                <button class="btn btn-primary my-2" type="submit">Найти</button>
-            </form>
+                <button class="btn btn-primary my-2" onclick={{action "updatePage"}}>Найти</button>
+            </div>
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3">

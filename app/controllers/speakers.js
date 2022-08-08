@@ -5,4 +5,9 @@ export default Controller.extend({
     dataService: service('data'),
     queryParams: ["search"],
     search: '',
+    actions: {
+        updatePage() {
+            location.reload();
+        }
+    }
 });
