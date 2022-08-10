@@ -29,8 +29,8 @@ export default Route.extend({
         }
     },
     actions: {
-        // loading(transition, originRoute) {
-        //     return false;
-        // }
+        reloadModel() {
+            this.refresh();
+        }
     }
 });

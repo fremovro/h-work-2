@@ -12,5 +12,11 @@ export default Route.extend({
     
     model({ search }){
         return this.get("dataService").getSpeakers(search);
+    },
+    
+    actions: {
+        reloadModel() {
+            this.refresh();
+        }
     }
 });

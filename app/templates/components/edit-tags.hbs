@@ -1,11 +1,5 @@
-<div class="form-group row">
-    <label for="inputTags" class="col-sm-2 col-form-label text-right">Теги</label>
-    <div class="col-sm-10">
-        <div class="bootstrap-tagsinput" id="tagsInput" name="tagsInput">
-            {{#each book.tags as |tag|}}
-                <span class="badge badge-info" id="{{tag}}" value="{{tag}}">{{tag}}<span data-role="remove" onclick={{action "deleteTag" tag}}></span></span>
-            {{/each}}
-            <input id="newTag" type="text" name="" placeholder="" oninput={{action "createNewTag"}}>
-        </div>
-    </div>
-</div>
+<select multiple="multiple" data-role="tagsinput" id="inputTags">
+  {{#each tags as |tag|}}
+    <option value="{{tag}}" selected="selected">{{tag}}</option>
+  {{/each}}
+</select>

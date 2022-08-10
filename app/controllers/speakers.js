@@ -7,7 +7,7 @@ export default Controller.extend({
     search: '',
     actions: {
         updatePage() {
-            location.reload();
-        }
+            this.send("reloadModel");
+        },
     }
 });

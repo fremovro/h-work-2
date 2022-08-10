@@ -9,12 +9,10 @@ export default Controller.extend({
         changeUploadData(uploadData) {
             set(this, 'uploadData', uploadData);
         },
+        changeTags(newTags) {
+            set(this, 'tags', [...newTags]);
+          },
         async editBook(idBook) {
-            let tagsInput=document.getElementById('tagsInput');
-            let tags = [];
-            for(var i=0;i<tagsInput.childElementCount-1;i++){
-                tags[i] = tagsInput.children[i].id;
-            }
             const uploadData = get(this, 'uploadData');
             await this.get("dataService").editBook({
                 id: parseInt(idBook),
@@ -22,7 +20,7 @@ export default Controller.extend({
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
-                tags: tags,
+                tags: this.get('tags'),
             }, uploadData);
             this.set('bookName'); this.set('bookAuthor'); this.set('bookSize'); this.set('bookDescription');
             this.transitionToRoute('books');
