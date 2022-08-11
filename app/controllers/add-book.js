@@ -9,19 +9,17 @@ export default Controller.extend({
         changeUploadData(uploadData) {
             set(this, 'uploadData', uploadData);
         },
+        changeTags(newTags) {
+            set(this, 'tags', [...newTags]);
+        },
         async addBook() {
-            let tagsInput=document.getElementById('tagsInput');
-            let tags = [];
-            for(var i=0;i<tagsInput.childElementCount-1;i++){
-                tags[i] = tagsInput.children[i].id;
-            }
             let newBook = await this.get("dataService").createBook({
                 name: this.get('bookName'),
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
                 coverURL: "images/book-cover.jpg",
-                tags: tags,
+                tags: this.get('tags'),
             });
             const uploadData = get(this, 'uploadData');
             await this.get("dataService").editBook({

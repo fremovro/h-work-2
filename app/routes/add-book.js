@@ -6,4 +6,7 @@ export default Route.extend({
         this._super(...arguments);
         set(controller, 'uploadData', null);
     },
+    model() {
+        return [];
+    }
 });
