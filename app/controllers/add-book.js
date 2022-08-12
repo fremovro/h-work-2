@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import ENV from 'h-work-2/config/environment';
 import { get, set } from '@ember/object';
 
 export default Controller.extend({
@@ -9,28 +10,46 @@ export default Controller.extend({
         changeUploadData(uploadData) {
             set(this, 'uploadData', uploadData);
         },
+
         changeTags(newTags) {
             set(this, 'tags', [...newTags]);
         },
+
         async addBook() {
-            let newBook = await this.get("dataService").createBook({
+            const uploadData = get(this, 'uploadData');
+            let coverURL = new Promise((resolve, reject) => {
+                if(uploadData) {
+                    uploadData.url = `${ENV.backendURL}/FileUpload`;
+                    uploadData.submit().done((result) => {
+                        resolve(`/uploads/${result.filename}`);
+                    });
+                }
+                else resolve("images/book-cover.jpg");
+            });
+            let tags = new Promise((resolve, reject) => {
+                if(this.get('tags')) {
+                    resolve(this.get('tags'));
+                }
+                else resolve([]);
+            });
+            let bookModel = {
                 name: this.get('bookName'),
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
-                coverURL: "images/book-cover.jpg",
-                tags: this.get('tags'),
-            });
-            const uploadData = get(this, 'uploadData');
-            await this.get("dataService").editBook({
-                id: parseInt(newBook.id),
-            }, uploadData);
+                coverURL: await coverURL,
+                tags: await tags,
+            };
+            
+            let newBook = this.get('store').createRecord('book', bookModel);
+            newBook.serialize();
+            await newBook.save();
             this.set('bookName'); this.set('bookAuthor'); this.set('bookSize'); this.set('bookDescription');
-            this.transitionToRoute('books');
+            this.transitionToRoute('book');
         }   
     },
 
     reset() {
         set(this, 'uploadData', null);
-      }
+    }
 });

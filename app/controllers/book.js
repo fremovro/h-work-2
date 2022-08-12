@@ -6,9 +6,6 @@ export default Controller.extend({
     queryParams: ["search", "tags"],
     search: '',
     tags: '',
-    init() {
-        this._super(...arguments);
-    },
     actions: {
         updatePage() {
             this.send("reloadModel");

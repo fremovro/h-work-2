@@ -9,6 +9,7 @@ export default Route.extend({
         set(controller, 'uploadData', null);
     },
     model({ id }) {
-        return this.get("dataService").getBook(id);
+        return this.get('store').findRecord('book', id);
+        // return this.get("dataService").getBook(id);
     }
 });

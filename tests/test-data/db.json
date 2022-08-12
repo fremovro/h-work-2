@@ -1,5 +1,5 @@
 {
-  "db_books": [
+  "books": [
     {
       "id": 1,
       "name": "Игрок",
@@ -36,10 +36,10 @@
         "антиутопия",
         "классика"
       ],
-      "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1659524560203.jpg"
+      "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1660224126407.jpg"
     }
   ],
-  "db_speakers": [
+  "speakers": [
     {
       "id": 1,
       "name": "Роман",

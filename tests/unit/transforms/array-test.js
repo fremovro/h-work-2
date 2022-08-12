@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Controller | speakers', function(hooks) {
+module('transform:array', 'Unit | Transform | array', function(hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
   test('it exists', function(assert) {
-    let controller = this.owner.lookup('controller:speakers');
-    assert.ok(controller);
+    let transform = this.owner.lookup('transform:array');
+    assert.ok(transform);
   });
 });

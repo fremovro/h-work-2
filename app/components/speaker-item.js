@@ -6,8 +6,8 @@ export default Component.extend({
 
     actions: {
         async deleteSpeaker(speaker) {
-            await this.get('dataService').deleteSpeaker(speaker);
-            this.transitionToRoute('books');
+            await speaker.destroyRecord();
+            // this.transitionToRoute('speaker');
         }
     }
 });

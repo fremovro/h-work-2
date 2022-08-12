@@ -17,15 +17,17 @@ export default Route.extend({
 
     model({ search, tags }) {
         if(search || tags){
-            return this.get("dataService").getBooks(search, tags);
+            // return this.get("dataService").getBooks(tsearch, tags);
+            return this.get('store').query('book', { q: search, tags_like: tags });
         }
         else {
-            return new Promise((resolve) => {
-                later(async () => {
-                    let books = await this.get("dataService").getBooks(search, tags);
-                    resolve(books);
-                }, 1500);
-            });
+            // return new Promise((resolve) => {
+            //     later(async () => {
+            //         let books = await this.get("dataService").getBooks(search, tags);
+            //         resolve(books);
+            //     }, 1500);
+            // });
+            return this.get('store').findAll("book");
         }
     },
     actions: {

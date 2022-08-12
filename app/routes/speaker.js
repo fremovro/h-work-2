@@ -11,7 +11,9 @@ export default Route.extend({
     dataService: service('data'),
     
     model({ search }){
-        return this.get("dataService").getSpeakers(search);
+        // return this.get("dataService").getSpeakers(search);
+        if(search) return this.get('store').query('speaker', { q: search});
+        else return this.get('store').findAll("speaker");
     },
     
     actions: {
