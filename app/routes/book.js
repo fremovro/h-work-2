@@ -4,6 +4,8 @@ import { Promise } from 'rsvp';
 import { later } from '@ember/runloop';
 
 export default Route.extend({
+    store: service('store'),
+
     queryParams: {
         search: {
             refreshModel: false,
@@ -13,11 +15,12 @@ export default Route.extend({
         }
     },
 
-    dataService: service('data'),
+    init() {
+        this._super(...arguments);
+    },
 
     model({ search, tags }) {
         if(search || tags){
-            // return this.get("dataService").getBooks(tsearch, tags);
             return this.get('store').query('book', { q: search, tags_like: tags });
         }
         else {
@@ -33,6 +36,11 @@ export default Route.extend({
     actions: {
         reloadModel() {
             this.refresh();
+        },
+        async delBook(book) {
+            console.log('2');
+            await book.destroyRecord();
+            this.get('store').unloadRecord(book);
         }
     }
 });

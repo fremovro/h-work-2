@@ -3,19 +3,18 @@ import { inject as service } from '@ember/service';
 
 
 export default Component.extend({
-    dataService: service('data'),
-    store: service('store'),
+    // store: service('store'),
 
-    init() {
-        this._super(...arguments);
-
-        // this.set('tags', A()); 
-    },
+    // init() {
+    //     this._super(...arguments);
+    // },
 
     actions: {
         async deleteBook(book) {
-            await book.destroyRecord();
-            this.get('store').unloadRecord(book);
+            console.log('1');
+            this.send("delBook", book);
+            // await book.destroyRecord();
+            // this.get('store').unloadRecord(book);
         },
     }
 });

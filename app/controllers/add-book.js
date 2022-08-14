@@ -1,11 +1,8 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
 import ENV from 'h-work-2/config/environment';
 import { get, set } from '@ember/object';
 
 export default Controller.extend({
-    dataService: service('data'),
-
     actions: {
         changeUploadData(uploadData) {
             set(this, 'uploadData', uploadData);

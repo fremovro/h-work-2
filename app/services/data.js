@@ -1,11 +1,10 @@
 import Service from '@ember/service';
-import ENV from 'h-work-2/config/environment';
-import { A } from '@ember/array';
+// import ENV from 'h-work-2/config/environment';
 
 export default Service.extend({
-    init() {
-        this._super(...arguments);
-    },
+    // init() {
+    //     this._super(...arguments);
+    // },
     // async createBook(book) {
     //     this.get('books').pushObject(book);
     //     let response = await fetch(`${ENV.backendURL}/books`, {
@@ -21,27 +20,26 @@ export default Service.extend({
     async addPhoto(book, uploadData) {
         // this.get('books').removeObject(this.get('books').find((temp) => temp.id === parseInt(book.id)));
         // this.get('books').pushObject(book);
-        if(uploadData) {
-            console.log(book.id);
-            uploadData.url = `${ENV.backendURL}/FileUpload`;
-            uploadData.submit().done(async (result/*, textStatus, jqXhr*/) => {
-                console.log(result);
-                const dataToUpload = {
-                    entityName: 'books',
-                    id: book.id,
-                    fileName: result.filename
-                };
+        // if(uploadData) {
+        //     console.log(book.id);
+        //     uploadData.url = `${ENV.backendURL}/FileUpload`;
+        //     uploadData.submit().done(async (result/*, textStatus, jqXhr*/) => {
+        //         console.log(result);
+        //         const dataToUpload = {
+        //             entityName: 'books',
+        //             id: book.id,
+        //             fileName: result.filename
+        //         };
                 
-                await fetch(`${ENV.backendURL}/saveURL`, {
-                    method: 'POST',
-                    body: JSON.stringify(dataToUpload),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-            });
-        }
-        
+        //         await fetch(`${ENV.backendURL}/saveURL`, {
+        //             method: 'POST',
+        //             body: JSON.stringify(dataToUpload),
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             }
+        //         });
+        //     });
+        // }
         // return await fetch(`${ENV.backendURL}/books/${book.id}`, {
         //     method: 'PATCH',
         //     body: JSON.stringify(book),
