@@ -37,6 +37,15 @@
         "классика"
       ],
       "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1660224126407.jpg"
+    },
+    {
+      "name": "malina",
+      "author": null,
+      "size": null,
+      "description": null,
+      "tags": [],
+      "coverURL": "images/book-cover.jpg",
+      "id": 4
     }
   ],
   "speakers": [
@@ -51,6 +60,12 @@
       "name": "Кристина",
       "surname": "Ласюкова",
       "patronymic": "Александровна"
+    },
+    {
+      "name": "Иван",
+      "surname": "Быков",
+      "patronymic": "Владимирович",
+      "id": 3
     }
   ]
 }
