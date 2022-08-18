@@ -12,16 +12,16 @@ export default DS.JSONAPIAdapter.extend({
         });
     },
 
-    // buildURL(modelName, id, snapshot, requestType, query) {
-    //     let url = this._super(...arguments);
-    //     if (modelName === 'author' && requestType === 'findRecord' && id) {
-    //         url += '?_embed=books';
-    //     }
+    buildURL(modelName, id, snapshot, requestType, query) {
+        let url = this._super(...arguments);
+        if (modelName === 'meeting' && requestType === 'findAll') {
+            url += '?_embed=lectures';
+        }
 
-    //     if (modelName === 'book' && requestType === 'findRecord' && id) {
-    //         url += '?_embed=reviews';
-    //     }
+        // if (modelName === 'book' && requestType === 'findRecord' && id) {
+        //     url += '?_embed=reviews';
+        // }
 
-    //     return url;
-    // },
+        return url;
+    },
 });

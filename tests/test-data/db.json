@@ -37,15 +37,6 @@
         "классика"
       ],
       "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1660224126407.jpg"
-    },
-    {
-      "name": "malina",
-      "author": null,
-      "size": null,
-      "description": null,
-      "tags": [],
-      "coverURL": "images/book-cover.jpg",
-      "id": 4
     }
   ],
   "speakers": [
@@ -66,6 +57,47 @@
       "surname": "Быков",
       "patronymic": "Владимирович",
       "id": 3
+    }
+  ],
+  "lectures": [
+    {
+      "id": 1,
+      "date": "2022-08-19T19:00:00.000Z",
+      "rating": "60",
+      "presentURL": "https://...",
+      "videoURL": "https://...",
+      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
+      "bookId": "1",
+      "speakerId": "1",
+      "meetingId": 1
+    },
+    {
+      "id": 2,
+      "date": "2022-08-19T19:00:00.000Z",
+      "rating": "62",
+      "presentURL": "https://...",
+      "videoURL": "https://...",
+      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
+      "bookId": "2",
+      "speakerId": "2",
+      "meetingId": 1
+    },
+    {
+      "id": 3,
+      "date": "2022-08-19T19:00:00.000Z",
+      "rating": "76",
+      "presentURL": "https://...",
+      "videoURL": "https://...",
+      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
+      "bookId": "3",
+      "speakerId": "3",
+      "meetingId": 1
+    }
+  ],
+  "meetings": [
+    {
+      "id": 1,
+      "eventDate": "2022-08-11T19:00:00.000Z"
     }
   ]
 }
