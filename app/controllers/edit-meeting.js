@@ -5,10 +5,9 @@ export default Controller.extend({
         async editMeeting() {
             let meetingModel = this.get('model');
             if(this.get('meetingEventDate')) {
-                meetingModel.set('eventDate', this.get('meetingEventDate'));
-
-                await meetingModel.save();
+                meetingModel.set('eventDate', this.get('meetingEventDate'));    
             }
+            await meetingModel.save();
 
             this.set('meetingEventDate');
             this.transitionToRoute('meeting');

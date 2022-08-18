@@ -38,15 +38,14 @@
         <div class="form-group row">
             <label for="inputBook" class="col-sm-2 col-form-label text-right big">Книга</label>
             <div class="col-sm-10">
-                <select class="selectpicker form-control form-control-lg" id="inputBook" data-live-search="true" data-size="5" title="Выберите книгу...">
-                    <option>Книга 1</option>
-                    <option>Книга 2</option>
-                    <option>Книга 3</option>
-                    <option>Книга 4</option>
-                    <option>Книга 5</option>
-                    <option>Книга 6</option>
-                    <option>Книга 7</option>
-                </select>
+                {{#power-select  onchange=(action (mut selectedBook)) search=(action "getBooks") as |book|}}
+                    {{book.name}}
+                {{/power-select}}
+                {{!-- <select class="selectpicker form-control form-control-lg" id="inputBook" data-live-search="true" data-size="5" title="Выберите книгу...">
+                    {{#power-select searchEnabled=true searchField="name" onchange=(action (mut selectedBook)) selected=book search=(action "getBooks") as |book|}}
+                        {{book.name}}
+                    {{/power-select}}
+                </select> --}}
             </div>					
         </div>
         <div class="form-group row">

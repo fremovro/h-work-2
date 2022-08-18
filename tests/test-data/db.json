@@ -63,12 +63,12 @@
     {
       "id": 1,
       "date": "2022-08-19T19:00:00.000Z",
-      "rating": "60",
+      "rating": "80",
       "presentURL": "https://...",
       "videoURL": "https://...",
       "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
-      "bookId": "1",
-      "speakerId": "1",
+      "bookId": 1,
+      "speakerId": 1,
       "meetingId": 1
     },
     {
@@ -78,8 +78,8 @@
       "presentURL": "https://...",
       "videoURL": "https://...",
       "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
-      "bookId": "2",
-      "speakerId": "2",
+      "bookId": 2,
+      "speakerId": 2,
       "meetingId": 1
     },
     {
@@ -89,8 +89,8 @@
       "presentURL": "https://...",
       "videoURL": "https://...",
       "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
-      "bookId": "3",
-      "speakerId": "3",
+      "bookId": 3,
+      "speakerId": 3,
       "meetingId": 1
     }
   ],
