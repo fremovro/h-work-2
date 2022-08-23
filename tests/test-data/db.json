@@ -61,43 +61,58 @@
   ],
   "lectures": [
     {
-      "id": 1,
-      "date": "2022-08-19T19:00:00.000Z",
-      "rating": "80",
-      "presentURL": "https://...",
-      "videoURL": "https://...",
-      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
+      "date": null,
+      "rating": null,
+      "presentURL": null,
+      "videoURL": null,
+      "review": null,
       "bookId": 1,
       "speakerId": 1,
-      "meetingId": 1
+      "meetingId": 2,
+      "id": 4
     },
     {
-      "id": 2,
-      "date": "2022-08-19T19:00:00.000Z",
-      "rating": "62",
-      "presentURL": "https://...",
-      "videoURL": "https://...",
-      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
-      "bookId": 2,
-      "speakerId": 2,
-      "meetingId": 1
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": null,
+      "presentURL": null,
+      "videoURL": null,
+      "review": null,
+      "bookId": 1,
+      "speakerId": 1,
+      "meetingId": 2,
+      "id": 5
     },
     {
-      "id": 3,
-      "date": "2022-08-19T19:00:00.000Z",
-      "rating": "76",
-      "presentURL": "https://...",
-      "videoURL": "https://...",
-      "review": "Molestiae molestiae saepe commodi delectus possimus nobis et. Assumenda sunt blanditiis. Pariatur et aut molestiae nihil. Blanditiis explicabo autem error. Qui aperiam sunt earum quod aut deserunt corporis accusamus. Quia numquam est magnam cumque.",
-      "bookId": 3,
-      "speakerId": 3,
-      "meetingId": 1
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": null,
+      "presentURL": null,
+      "videoURL": null,
+      "review": null,
+      "bookId": 1,
+      "speakerId": 1,
+      "meetingId": 2,
+      "id": 6
+    },
+    {
+      "date": null,
+      "rating": null,
+      "presentURL": null,
+      "videoURL": null,
+      "review": null,
+      "bookId": 1,
+      "speakerId": 1,
+      "meetingId": 3,
+      "id": 7
     }
   ],
   "meetings": [
     {
-      "id": 1,
-      "eventDate": "2022-08-11T19:00:00.000Z"
+      "eventDate": "2022-08-11T19:00:00.000Z",
+      "id": 2
+    },
+    {
+      "eventDate": null,
+      "id": 3
     }
   ]
 }

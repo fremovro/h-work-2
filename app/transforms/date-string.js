@@ -17,7 +17,6 @@ export default DateTransform.extend({
 
   serialize(deserialized) {
     let deserializedDate = deserialized ? this.get('moment').moment(deserialized).toDate() : null;
-    console.log(deserializedDate);
     return this._super(deserializedDate);
     // return deserialized;
   }

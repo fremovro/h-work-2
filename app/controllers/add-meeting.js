@@ -9,18 +9,29 @@ export default Controller.extend({
     },
 
     actions: {
-        async editMeeting() {
+        async addMeeting() {
             let meetingModel = this.get('model');
             if(this.get('meetingEventDate')) {
                 meetingModel.set('eventDate', this.get('meetingEventDate'));
+                console.log(meetingModel);
                 meetingModel.lectures.forEach(lecture => {
                     lecture.set('date', this.get('meetingEventDate'));
                     lecture.save();
                 });
+                await meetingModel.save();
+                this.set('meetingEventDate');
+                this.transitionToRoute('meeting');
             }
-            await meetingModel.save();
-
-            this.set('meetingEventDate');
+            else alert('необходимо указать дату встречи...')
+        },
+        async deleteMeeting(meeting) {
+            let temp = meeting;
+            await meeting.destroyRecord();
+            temp.lectures.forEach(lecture => {
+                lecture.destroyRecord();
+                this.get('store').unloadRecord(lecture);
+            });
+            this.get('store').unloadRecord(meeting);
             this.transitionToRoute('meeting');
         },
         async deleteLecture(lecture) {
