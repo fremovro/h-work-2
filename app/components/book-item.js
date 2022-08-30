@@ -11,8 +11,7 @@ export default Component.extend({
 
     actions: {
         async deleteBook(book) {
-            await book.destroyRecord();
-            this.get('store').unloadRecord(book);
+            this.delBook(book);
         },
     }
 });

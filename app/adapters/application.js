@@ -14,7 +14,7 @@ export default DS.JSONAPIAdapter.extend({
 
     buildURL(modelName, id, snapshot, requestType, query) {
         let url = this._super(...arguments);
-        if (modelName === 'meeting' && requestType === 'findAll') {
+        if (modelName === 'meeting' && requestType === 'query') {
             url += '?_embed=lectures';
         }
 
@@ -24,4 +24,14 @@ export default DS.JSONAPIAdapter.extend({
 
         return url;
     },
+    
+    handleResponse(status, headers, payload) {
+        const meta = {
+          total: headers['x-total-count'],
+        };
+    
+        payload.meta = meta;
+    
+        return this._super(status, headers, payload);
+    }
 });

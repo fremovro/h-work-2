@@ -61,58 +61,77 @@
   ],
   "lectures": [
     {
-      "date": null,
-      "rating": null,
-      "presentURL": null,
-      "videoURL": null,
-      "review": null,
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": "40",
+      "presentURL": "1",
+      "videoURL": "1",
+      "review": "Сочинение по книге должно содержать не только описание сюжета и героев произведения, но и подчеркивать, чем именно оно интересно, какова его проблематика, тема, идея и т.д.",
+      "bookId": 2,
+      "speakerId": 2,
+      "meetingId": 1,
+      "id": 1
+    },
+    {
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": "60",
+      "presentURL": "1",
+      "videoURL": "1",
+      "review": "Сочинение по книге должно содержать не только описание сюжета и героев произведения, но и подчеркивать, чем именно оно интересно, какова его проблематика, тема, идея и т.д.",
+      "bookId": 1,
+      "speakerId": 1,
+      "meetingId": 1,
+      "id": 2
+    },
+    {
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": "1",
+      "presentURL": "1",
+      "videoURL": "1",
+      "review": "1",
       "bookId": 1,
       "speakerId": 1,
       "meetingId": 2,
+      "id": 3
+    },
+    {
+      "date": "2022-08-11T19:00:00.000Z",
+      "rating": "2",
+      "presentURL": "2",
+      "videoURL": "2",
+      "review": "2",
+      "bookId": 2,
+      "speakerId": 2,
+      "meetingId": 3,
       "id": 4
     },
     {
-      "date": "2022-08-11T19:00:00.000Z",
-      "rating": null,
-      "presentURL": null,
-      "videoURL": null,
-      "review": null,
-      "bookId": 1,
-      "speakerId": 1,
-      "meetingId": 2,
+      "date": "2022-08-12T19:00:00.000Z",
+      "rating": "3",
+      "presentURL": "3",
+      "videoURL": "3",
+      "review": "3",
+      "bookId": 3,
+      "speakerId": 3,
+      "meetingId": 4,
       "id": 5
-    },
-    {
-      "date": "2022-08-11T19:00:00.000Z",
-      "rating": null,
-      "presentURL": null,
-      "videoURL": null,
-      "review": null,
-      "bookId": 1,
-      "speakerId": 1,
-      "meetingId": 2,
-      "id": 6
-    },
-    {
-      "date": null,
-      "rating": null,
-      "presentURL": null,
-      "videoURL": null,
-      "review": null,
-      "bookId": 1,
-      "speakerId": 1,
-      "meetingId": 3,
-      "id": 7
     }
   ],
   "meetings": [
     {
       "eventDate": "2022-08-11T19:00:00.000Z",
+      "id": 1
+    },
+    {
+      "eventDate": "2022-08-11T19:00:00.000Z",
       "id": 2
     },
     {
-      "eventDate": null,
+      "eventDate": "2022-08-11T19:00:00.000Z",
       "id": 3
+    },
+    {
+      "eventDate": "2022-08-12T19:00:00.000Z",
+      "id": 4
     }
   ]
 }

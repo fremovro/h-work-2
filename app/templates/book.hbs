@@ -23,7 +23,7 @@
     </div>
     <div class="row row-cols-1 row-cols-md-3 fix-margin">
         {{#each model as |book|}}
-            {{book-item book=book}}
+            {{book-item delBook=(action "deleteBook") book=book}}
         {{/each}}
     </div>
 </div>

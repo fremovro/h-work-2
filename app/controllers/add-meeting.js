@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -25,12 +26,18 @@ export default Controller.extend({
             else alert('необходимо указать дату встречи...')
         },
         async deleteMeeting(meeting) {
-            let temp = meeting;
-            await meeting.destroyRecord();
-            temp.lectures.forEach(lecture => {
-                lecture.destroyRecord();
-                this.get('store').unloadRecord(lecture);
+            let temp = meeting; let temp2 =[], temp3=[];
+
+            temp.get('lectures').toArray().forEach(lecture => {
+                temp2.push(lecture);
+                const promise = lecture.destroyRecord();
+                temp3.push(promise);
             });
+            await RSVP.all(temp3);
+            temp2.forEach(lecture => {
+                this.get('store').unloadRecord(lecture);
+            })
+            await meeting.destroyRecord();
             this.get('store').unloadRecord(meeting);
             this.transitionToRoute('meeting');
         },

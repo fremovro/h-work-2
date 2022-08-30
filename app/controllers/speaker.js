@@ -9,5 +9,9 @@ export default Controller.extend({
         updatePage() {
             this.send("reloadModel");
         },
+        async deleteSpeaker(speaker) {
+            await speaker.destroyRecord();
+            this.get('store').unloadRecord(speaker);
+        }
     }
 });

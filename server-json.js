@@ -104,6 +104,25 @@ server.post('/saveURL', function (req, res) {
   res.status(200).json(book);
 });
 
+server.use((request, response, next) => {
+  if (request.method === 'GET' && request.path === '/meetings') {
+    const meetings = router.db.get('meetings').filter((m) => { 
+      const temp = router.db.get('lectures').filter((l) => l.meetingId === m.id );
+      console.log(Number.isNaN(request.query.chosenSpeaker));
+      if(!Number.isNaN(request.query.chosenBook) || !Number.isNaN(request.query.chosenSpeaker)) {
+        const temp2 = temp.filter((l) => l.bookId === request.query.chosenBook || l.authorId === request.query.chosenSpeaker);
+        return temp2.length>0;
+      }
+
+      return true;
+    }).value();
+
+    response.json(meetings);
+  } else {
+    next();
+  }
+});
+
 // Use default router
 server.use(router)
 
