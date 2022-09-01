@@ -1,30 +1,42 @@
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 
 export default Route.extend({
     queryParams: {
         page: {
           refreshModel: true
         },
-        chosenSpeaker: {
-            refreshModel: true
+        speaker: {
+            refreshModel: false
         },
-        chosenBook: {
-            refreshModel: true
+        book: {
+            refreshModel: false
+        },
+        date: {
+            refreshModel: false
         },
     },
 
-    model({ page, chosenSpeaker, chosenBook }) {
+    model({ page, speaker, book, date }) {
         const query = {
             _page: page,
             _limit: 2,
         };
-        if(chosenSpeaker) { 
-            console.log(chosenSpeaker);
-            query.chosenSpeaker = chosenSpeaker;
-        }
-        if(chosenBook) query.chosenBook = chosenBook;
+        if(speaker) query.speaker = speaker;
+        if(book) query.book = book;
+        if(date) query.date = date;
         
-        return this.get('store').query('meeting', query);
+        return RSVP.hash({
+            meetings: this.get('store').query('meeting', query),
+            speakers: this.get('store').findAll('speaker'),
+            books: this.get('store').findAll('book')
+        });
+    },
+    
+    actions: {
+        reloadModel() {
+            this.refresh();
+        },
     },
 
     setupController(controller, model) {

@@ -105,19 +105,36 @@ server.post('/saveURL', function (req, res) {
 });
 
 server.use((request, response, next) => {
-  if (request.method === 'GET' && request.path === '/meetings') {
-    const meetings = router.db.get('meetings').filter((m) => { 
-      const temp = router.db.get('lectures').filter((l) => l.meetingId === m.id );
-      console.log(Number.isNaN(request.query.chosenSpeaker));
-      if(!Number.isNaN(request.query.chosenBook) || !Number.isNaN(request.query.chosenSpeaker)) {
-        const temp2 = temp.filter((l) => l.bookId === request.query.chosenBook || l.authorId === request.query.chosenSpeaker);
-        return temp2.length>0;
+  if (request.method === 'GET' && request.path === '/meetings' && 
+  (request.query.book!=undefined || request.query.speaker!=undefined || request.query.date!=undefined)) {
+    const meetings = router.db.get('meetings').filter((m) => {
+      if(request.query.date!=undefined) {
+        let eventDate=new Date(m.eventDate.toString())
+        let date=new Date(request.query.date + "T19:00:00.000Z");
+        date.setDate(date.getDate() - 1);
+        return date.toString()==eventDate.toString();
       }
+      return true;
+    });
 
+    const result = meetings.filter((m) => { 
+      const temp = router.db.get('lectures').filter((l) => l.meetingId === m.id );
+
+      if(request.query.book!=undefined && request.query.speaker!=undefined) {
+        const temp2 = temp.filter((l) => {
+          return l.bookId == request.query.book && l.speakerId == request.query.speaker;
+        });
+        return (temp2.value().length>0);
+      }
+      else if(request.query.book!=undefined || request.query.speaker!=undefined) {
+        const temp2 = temp.filter((l) => {
+          return l.bookId == request.query.book || l.speakerId == request.query.speaker;
+        });
+        return (temp2.value().length>0);
+      }
       return true;
     }).value();
-
-    response.json(meetings);
+    response.json(result);
   } else {
     next();
   }

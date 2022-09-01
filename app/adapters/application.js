@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { isNone } from '@ember/utils';
 import ENV from 'h-work-2/config/environment';
 
 export default DS.JSONAPIAdapter.extend({
@@ -17,10 +16,6 @@ export default DS.JSONAPIAdapter.extend({
         if (modelName === 'meeting' && requestType === 'query') {
             url += '?_embed=lectures';
         }
-
-        // if (modelName === 'book' && requestType === 'findRecord' && id) {
-        //     url += '?_embed=reviews';
-        // }
 
         return url;
     },

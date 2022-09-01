@@ -6,13 +6,14 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     store: service('store'),
 
-    queryParams: ['page', 'chosenBook', 'chosenSpeaker'],
+    queryParams: ['page', 'book', 'speaker', 'date'],
     page: 1,
-    chosenBook: '',
-    chosenSpeaker: '',
+    book: '',
+    speaker: '',
+    date: '',
 
-    pages: computed('model.meta.total', function() {
-        const total = Number(this.get('model.meta.total'));
+    pages: computed('model.meetings.meta.total', function() {
+        const total = Number(this.get('model.meetings.meta.total'));
         if (Number.isNaN(total) || total <= 0) {
           return [];
         }
@@ -20,6 +21,16 @@ export default Controller.extend({
         return new Array(Math.ceil(total / 2))
           .fill()
           .map((value, index) => index + 1);
+    }),
+
+    selectedSpeaker: computed('speaker', function() {
+        const speaker = this.get('speaker');
+        return speaker ? this.get('model.speakers').findBy('id', speaker) : null;
+    }),
+
+    selectedBook: computed('book', function() {
+        const book = this.get('book');
+        return book ? this.get('model.books').findBy('id', book) : null;
     }),
 
     actions: {
@@ -38,11 +49,28 @@ export default Controller.extend({
             await meeting.destroyRecord();
             this.get('store').unloadRecord(meeting);
         },
-        getBooks() {
-            return this.get('store').findAll('book');
+
+        changeSpeaker(speaker) {
+            this.set('speaker', speaker ? speaker.get('id') : '');
         },
-        getSpeakers() {
-            return this.get('store').findAll('speaker');
+
+        changeBook(book) {
+            this.set('book', book ? book.get('id') : '');
+        },
+
+        changeDate(date) {
+            this.set('date', date ? date.get('id') : '');
+        },
+
+        updatePage() {
+            this.send("reloadModel");
+        },
+
+        cleanSearchParam() {
+            this.set('book', '');
+            this.set('speaker', '');
+            this.set('date', '');
+            this.send("reloadModel");
         }
     }
 });

@@ -5,7 +5,7 @@ export default Controller.extend({
     store: service(),
     actions: {
         async addLecture() {
-            let meetingModel = this.get('model');
+            let meetingModel = this.get('model').meeting;
             if(this.get('newBook') && this.get('newSpeaker'))
             {
                 let lectureModel = {
@@ -27,12 +27,6 @@ export default Controller.extend({
             else {
                 alert('для создания нового доклада необходимо выбрать книгу и спикера...');
             }
-        },
-        getBooks() {
-            return this.get('store').findAll('book');
-        },
-        getSpeakers() {
-            return this.get('store').findAll('speaker');
         }
     }
 });
