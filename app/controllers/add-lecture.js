@@ -21,7 +21,14 @@ export default Controller.extend({
                 let newLecture = this.get('store').createRecord('lecture', lectureModel);
                 newLecture.serialize();
                 await newLecture.save();
-                this.set('lectureRating'); this.set('newBook'); this.set('newSpeaker'); this.set('newPresentURL'); this.set('newVideoURL'); this.set('newReview');
+                this.setProperties({
+                    lectureRating: undefined,
+                    newBook: undefined,
+                    newSpeaker: undefined,
+                    newPresentURL: undefined,
+                    newVideoURL: undefined,
+                    newReview: undefined
+                });
                 this.transitionToRoute('edit-meeting', meetingModel.get('id'));
             }
             else {

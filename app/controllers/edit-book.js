@@ -35,7 +35,12 @@ export default Controller.extend({
 
             await bookModel.save();
 
-            this.set('bookName'); this.set('bookAuthor'); this.set('bookSize'); this.set('bookDescription');
+            this.setProperties({
+                bookName: undefined,
+                bookAuthor: undefined,
+                bookSize: undefined,
+                bookDescription: undefined
+            });
             this.transitionToRoute('book');
         },
     },

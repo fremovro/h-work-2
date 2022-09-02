@@ -20,7 +20,7 @@ export default Controller.extend({
                     lecture.save();
                 });
                 await meetingModel.save();
-                this.set('meetingEventDate');
+                this.set('meetingEventDate', undefined);
                 this.transitionToRoute('meeting');
             }
             else alert('необходимо указать дату встречи...')

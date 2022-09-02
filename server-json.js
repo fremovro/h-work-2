@@ -4,7 +4,9 @@ const jsonServer = require('json-server')
 const path = require('path');
 const multer = require('multer');
 const fs = require("fs");
-
+const server = jsonServer.create()
+const router = jsonServer.router('./tests/test-data/db.json')
+const middlewares = jsonServer.defaults()
 const pathToSave = 'public/uploads';
 const urlBase = '/uploads/';
 const storage = multer.diskStorage({
@@ -46,9 +48,62 @@ const getError = (title, detail, status, pathToAttribute) => {
   return getErrors(errors);
 };
 
-const server = jsonServer.create()
-const router = jsonServer.router('./tests/test-data/db.json')
-const middlewares = jsonServer.defaults()
+const getUnauthorizedError = () => getError('Login', 'You are not authorized, please log in', 401, null);
+const getForbiddenError = () => getError('Forbidden', 'You don\'t have permissions to this resource', 403, null);
+
+const getBaseRoute = (req) => {
+  const path = req.path.split('/');
+  return path.length > 1 ? path[1] : '/';
+};
+
+const isAuthorized = (req) => {
+  const baseRoute = getBaseRoute(req);
+  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token' || ((baseRoute === 'authors' || baseRoute === 'books' || baseRoute === 'reviews') && req.method === 'GET')) {
+    return 200;
+  }
+
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) {
+    return 401;
+  }
+
+  try {
+    let user = jwt.verify(token, secretKey);
+    req.app.set('sessionUser', user);
+    return 200;
+  }
+  catch (e) {
+    return 403;
+  }
+};
+
+// Set default middlewares (logger, static, cors and no-cache)
+server.use(middlewares)
+
+// To handle POST, PUT and PATCH you need to use a body-parser
+// You can use the one used by JSON Server
+server.use(jsonServer.bodyParser);
+
+server.post('/token', function (req, res) {
+  const emailFromBody = req.body.email;
+  const passwordFromBody = req.body.password;
+  const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(passwordFromBody).digest('hex');
+
+  const db = router.db; //lowdb instance
+  const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
+
+  if (user) {
+    const token = generateAccessToken({ email: user.email, username: user.username });
+    res.json({ token });
+  }
+  else {
+    res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
+  }
+});
+
+
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)

@@ -58,6 +58,7 @@
     "broccoli-funnel": "^3.0.8",
     "ember-cli": "^3.1.4",
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.5-lts.1",
     "require": "^2.4.20"
   }

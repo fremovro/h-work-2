@@ -23,24 +23,25 @@ export default Controller.extend({
                 }
                 else resolve("images/book-cover.jpg");
             });
-            let tags = new Promise((resolve, reject) => {
-                if(this.get('tags')) {
-                    resolve(this.get('tags'));
-                }
-                else resolve([]);
-            });
+            let tags = this.get('tags') ? this.get('tags') : [];
             let bookModel = {
                 name: this.get('bookName'),
                 author: this.get('bookAuthor'),
                 size: this.get('bookSize'),
                 description: this.get('bookDescription'),
                 coverURL: await coverURL,
-                tags: await tags,
+                tags: this.get('tags'),
             };
             
             let newBook = this.get('store').createRecord('book', bookModel);
             newBook.serialize();
             await newBook.save();
+            this.setProperties({
+                bookName: undefined,
+                bookAuthor: undefined,
+                bookSize: undefined,
+                bookDescription: undefined
+            });
             this.set('bookName'); this.set('bookAuthor'); this.set('bookSize'); this.set('bookDescription');
             this.transitionToRoute('book');
         }   

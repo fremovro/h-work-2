@@ -13,7 +13,11 @@ export default Controller.extend({
             
             await speakerModel.save();
 
-            this.set('speakerName'); this.set('speakerSurname'); this.set('speakerPatronymic');
+            this.setProperties({
+                speakerName: undefined,
+                speakerSurname: undefined,
+                speakerPatronymic: undefined
+            });
             this.transitionToRoute('speaker');
         }
     }

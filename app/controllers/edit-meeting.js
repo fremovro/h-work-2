@@ -20,7 +20,7 @@ export default Controller.extend({
             }
             await meetingModel.save();
 
-            this.set('meetingEventDate');
+            this.set('meetingEventDate', undefined);
             this.transitionToRoute('meeting');
         },
         async deleteLecture(lecture) {

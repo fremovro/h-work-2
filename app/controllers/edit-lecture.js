@@ -15,7 +15,14 @@ export default Controller.extend({
 
             await lectureModel.save();
 
-            this.set('lectureRating'); this.set('newBook'); this.set('newSpeaker'); this.set('newPresentURL'); this.set('newVideoURL'); this.set('newReview');
+            this.setProperties({
+                lectureRating: undefined,
+                newBook: undefined,
+                newSpeaker: undefined,
+                newPresentURL: undefined,
+                newVideoURL: undefined,
+                newReview: undefined
+            });
             this.transitionToRoute('edit-meeting', lectureModel.meeting.get('id'));
         },
         getBooks() {
