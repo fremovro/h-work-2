@@ -42,7 +42,6 @@ export default Controller.extend({
                 bookSize: undefined,
                 bookDescription: undefined
             });
-            this.set('bookName'); this.set('bookAuthor'); this.set('bookSize'); this.set('bookDescription');
             this.transitionToRoute('book');
         }   
     },

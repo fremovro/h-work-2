@@ -1,10 +1,14 @@
-
 /* eslint-disable no-console */
-const jsonServer = require('json-server')
+const jsonServer = require('json-server');
+const jwt = require("jsonwebtoken");
 const path = require('path');
 const multer = require('multer');
 const fs = require("fs");
-const server = jsonServer.create()
+const crypto = require('crypto');
+const fetch = require('node-fetch');
+const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587fe2f90a832bd3ff9d42710a4da095a2ce285b009f0c3730cd9b8e1af3eb84df6611';
+const hashingSecret = "f844b09ff50c";
+const server = jsonServer.create();
 const router = jsonServer.router('./tests/test-data/db.json')
 const middlewares = jsonServer.defaults()
 const pathToSave = 'public/uploads';
@@ -25,12 +29,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+const generateAccessToken = (userData) => {
+  // expires after half and hour (1800 seconds = 30 minutes)
+  return jwt.sign(userData, secretKey, { expiresIn: '1800s' });
+}
+
 const getErrors = (errorsToSend) => {
   let errors = [];
   if (errorsToSend && Array.isArray(errorsToSend)) {
     errors = [...errorsToSend];
   }
-
+  console.log(errors);
   return {
     errors
   };
@@ -81,33 +90,6 @@ const isAuthorized = (req) => {
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
-
-// To handle POST, PUT and PATCH you need to use a body-parser
-// You can use the one used by JSON Server
-server.use(jsonServer.bodyParser);
-
-server.post('/token', function (req, res) {
-  const emailFromBody = req.body.email;
-  const passwordFromBody = req.body.password;
-  const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(passwordFromBody).digest('hex');
-
-  const db = router.db; //lowdb instance
-  const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
-
-  if (user) {
-    const token = generateAccessToken({ email: user.email, username: user.username });
-    res.json({ token });
-  }
-  else {
-    res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
-  }
-});
-
-
-
-// Set default middlewares (logger, static, cors and no-cache)
-server.use(middlewares)
-
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
@@ -137,6 +119,23 @@ function responseInterceptor(req, res, next) {
 
 server.use(responseInterceptor);
 
+server.post('/token', function (req, res) {
+  const emailFromBody = req.body.email;
+  const passwordFromBody = req.body.password;
+  const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(passwordFromBody).digest('hex');
+
+  const db = router.db; //lowdb instance
+  const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
+
+  if (user) {
+    const token = generateAccessToken({ email: user.email, username: user.username });
+    res.json({ token });
+  }
+  else {
+    res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
+  }
+});
+
 server.post("/FileUpload", upload.any(), function (req, res) {
   let filedata = req.files;
 
@@ -159,13 +158,76 @@ server.post('/saveURL', function (req, res) {
   res.status(200).json(book);
 });
 
-server.use((request, response, next) => {
-  if (request.method === 'GET' && request.path === '/meetings' && 
-  (request.query.book!=undefined || request.query.speaker!=undefined || request.query.date!=undefined)) {
+// Check authorization
+server.use((req, res, next) => {
+  const authorizeCode = isAuthorized(req);
+  if (authorizeCode === 200) {
+    next() // continue to JSON Server router
+  }
+  else if (authorizeCode === 401) {
+    res.status(401).json(getUnauthorizedError());
+  }
+  else if (authorizeCode === 403) {
+    res.status(403).json(getForbiddenError());
+  }
+  else {
+    res.status(403).json(getForbiddenError());
+  }
+});
+
+// Get current user
+server.use((req, res, next) => {
+  if (req.path === '/users/me' && req.method === 'GET') {
+    let storedUser = req.app.get('sessionUser');
+    if (!storedUser) {
+      res.sendStatus(404);
+    }
+    else {
+      const db = router.db; //lowdb instance
+      const user = db.get('users').find({ username: storedUser.username }).value();
+      const userCopy = Object.assign({}, user);
+
+      delete userCopy.password;
+      delete userCopy.passwordConfirmation;
+      res.json(userCopy);
+    }
+  }
+  else {
+    next();
+  }
+});
+
+// Disable get, modify or delete users
+server.use((req, res, next) => {
+  if (getBaseRoute(req) === 'users' && (req.method === 'PATCH' || req.method === 'DELETE')) {
+    res.sendStatus(404);
+  }
+  else if (getBaseRoute(req) === 'users' && req.method === 'GET') {
+    let urlSegms = req.url.split('/');
+    let idStr = urlSegms[urlSegms.length - 1];
+    let id = parseInt(idStr);
+    id = isNaN(id) ? idStr : id;
+
+    const db = router.db; //lowdb instance
+    const user = db.get('users').find({ id: id }).value();
+    const userCopy = Object.assign({}, user);
+
+    delete userCopy.password;
+    res.json(userCopy);
+  }
+  else {
+    // Continue to JSON Server router
+    next();
+  }
+});
+
+server.use((req, res, next) => {
+  if (req.method === 'GET' && req.path === '/meetings' && 
+  (req.query.book!=undefined || req.query.speaker!=undefined || req.query.date!=undefined)) {
     const meetings = router.db.get('meetings').filter((m) => {
-      if(request.query.date!=undefined) {
+      if(req.query.date!=undefined) {
         let eventDate=new Date(m.eventDate.toString())
-        let date=new Date(request.query.date + "T19:00:00.000Z");
+        let date=new Date(req.query.date + "T19:00:00.000Z");
         date.setDate(date.getDate() - 1);
         return date.toString()==eventDate.toString();
       }
@@ -175,22 +237,42 @@ server.use((request, response, next) => {
     const result = meetings.filter((m) => { 
       const temp = router.db.get('lectures').filter((l) => l.meetingId === m.id );
 
-      if(request.query.book!=undefined && request.query.speaker!=undefined) {
+      if(req.query.book!=undefined && req.query.speaker!=undefined) {
         const temp2 = temp.filter((l) => {
-          return l.bookId == request.query.book && l.speakerId == request.query.speaker;
+          return l.bookId == req.query.book && l.speakerId == req.query.speaker;
         });
         return (temp2.value().length>0);
       }
-      else if(request.query.book!=undefined || request.query.speaker!=undefined) {
+      else if(req.query.book!=undefined || req.query.speaker!=undefined) {
         const temp2 = temp.filter((l) => {
-          return l.bookId == request.query.book || l.speakerId == request.query.speaker;
+          return l.bookId == req.query.book || l.speakerId == req.query.speaker;
         });
         return (temp2.value().length>0);
       }
       return true;
     }).value();
-    response.json(result);
-  } else {
+    res.json(result);
+  } 
+  else { 
+    next();
+  }
+});
+
+server.use((req, res, next) => {
+  const db = router.db; //lowdb instance
+  const user = db.get('users').find({ email: req.body.email }).value();
+  const valid = !req.body || req.body && !user;
+  if (getBaseRoute(req) === 'users' && req.method === 'POST' && !valid) {
+    res.status(422).json(getError('Email', 'email is already taken', 422, '/data/attributes/email'));
+  }
+  else if (getBaseRoute(req) === 'users' && req.method === 'POST') {
+    const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(req.body.password).digest('hex');
+    req.body.password = hashedPassword;
+    // req.body.passwordConfirmation = hashedPassword;
+    next();
+  }
+  else {
+    // Continue to JSON Server router
     next();
   }
 });

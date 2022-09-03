@@ -21,7 +21,7 @@ Router.map(function() {
   this.route('add-lecture', { path: '/add-lecture/:id' });
   this.route('add-meeting', { path: '/add-meeting/:id' });
   this.route('add-meeting-lecture', { path: '/add-meeting-lecture/:id' })
-  this.route('register', { path: '/register'});
+  this.route('register', { path: '/register' });
 });
 
 export default Router;

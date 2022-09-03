@@ -24,9 +24,10 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
   app.import('vendor/tagsinput.css');
+  app.import('vendor/bootstrap-datepicker.css');
 
   const jsFiles = funnel('vendor', {
-    files: ['popper.min.js', 'tagsinput.js', 'bootstrap-file.js'],
+    files: ['popper.min.js', 'tagsinput.js', 'bootstrap-file.js', 'bootstrap-datepicker.min.js', 'bootstrap-datepicker.ru.min.js', 'bootstrap-select.min.js'],
     destDir: 'js'
   });
   const jqueryFiles = funnel('node_modules/blueimp-file-upload/js', {
