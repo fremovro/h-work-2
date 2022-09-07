@@ -27,6 +27,9 @@ const storage = multer.diskStorage({
   }
 });
 
+const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+const RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+
 const upload = multer({ storage });
 
 const generateAccessToken = (userData) => {
@@ -39,7 +42,7 @@ const getErrors = (errorsToSend) => {
   if (errorsToSend && Array.isArray(errorsToSend)) {
     errors = [...errorsToSend];
   }
-  console.log(errors);
+
   return {
     errors
   };
@@ -66,8 +69,8 @@ const getBaseRoute = (req) => {
 };
 
 const isAuthorized = (req) => {
-  const baseRoute = getBaseRoute(req);
-  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token' || ((baseRoute === 'authors' || baseRoute === 'books' || baseRoute === 'reviews') && req.method === 'GET')) {
+  // const baseRoute = getBaseRoute(req);
+  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token') {
     return 200;
   }
 
@@ -90,51 +93,10 @@ const isAuthorized = (req) => {
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
+
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
-
-function responseInterceptor(req, res, next) {
-  var originalSend = res.send;
-
-  res.send = function () {
-    let body = arguments[0];
-
-    if (req.method === 'DELETE') {
-      let urlSegms = req.url.split('/');
-      let idStr = urlSegms[urlSegms.length - 1];
-      let id = parseInt(idStr);
-      id = isNaN(id) ? idStr : id;
-
-      let newBody = Object.assign({}, JSON.parse(body));
-      newBody.id = id;
-      arguments[0] = JSON.stringify(newBody);
-    }
-
-    originalSend.apply(res, arguments);
-  };
-
-  next();
-}
-
-server.use(responseInterceptor);
-
-server.post('/token', function (req, res) {
-  const emailFromBody = req.body.email;
-  const passwordFromBody = req.body.password;
-  const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(passwordFromBody).digest('hex');
-
-  const db = router.db; //lowdb instance
-  const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
-
-  if (user) {
-    const token = generateAccessToken({ email: user.email, username: user.username });
-    res.json({ token });
-  }
-  else {
-    res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
-  }
-});
 
 server.post("/FileUpload", upload.any(), function (req, res) {
   let filedata = req.files;
@@ -156,6 +118,23 @@ server.post('/saveURL', function (req, res) {
   const db = router.db; //lowdb instance
   const book = db.get(entityName).find({ id: entityId }).assign({ coverURL: `${urlBase}${fileName}` }).write();
   res.status(200).json(book);
+});
+
+server.post('/token', function (req, res) {
+  const emailFromBody = req.body.email;
+  const passwordFromBody = req.body.password;
+  const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(passwordFromBody).digest('hex');
+
+  const db = router.db; //lowdb instance
+  const user = db.get('users').find({ email: emailFromBody, password: hashedPassword }).value();
+
+  if (user) {
+    const token = generateAccessToken({ email: user.email });
+    res.json({ token });
+  }
+  else {
+    res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
+  }
 });
 
 // Check authorization
@@ -184,11 +163,10 @@ server.use((req, res, next) => {
     }
     else {
       const db = router.db; //lowdb instance
-      const user = db.get('users').find({ username: storedUser.username }).value();
+      const user = db.get('users').find({ email: storedUser.email }).value();
       const userCopy = Object.assign({}, user);
 
       delete userCopy.password;
-      delete userCopy.passwordConfirmation;
       res.json(userCopy);
     }
   }
@@ -213,6 +191,7 @@ server.use((req, res, next) => {
     const userCopy = Object.assign({}, user);
 
     delete userCopy.password;
+    delete userCopy.passwordConfirmation;
     res.json(userCopy);
   }
   else {
@@ -220,6 +199,65 @@ server.use((req, res, next) => {
     next();
   }
 });
+
+// Validate user to add
+server.use((req, res, next) => {
+  const db = router.db; //lowdb instance
+  const user = db.get('users').find({ email: req.body.email }).value();
+
+  const valid = !req.body || req.body && !user;
+  if (getBaseRoute(req) === 'users' && req.method === 'POST' && !valid) {
+    res.status(422).json(getError('Email', 'Email is already taken', 422, '/data/attributes/email'));
+  }
+  else if (getBaseRoute(req) === 'users' && req.method === 'POST') {
+    const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(req.body.password).digest('hex');
+    req.body.password = hashedPassword;
+    next();
+  }
+  else {
+    // Continue to JSON Server router
+    next();
+  }
+});
+
+server.use(async (request, response, next) => {
+  if (request.path === '/recaptcha' && request.query.key) {
+    const { success } = await (await fetch(RECAPTCHA_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET}&response=${request.query.key}`,
+    })).json();
+
+    response.json({ success });
+  } else {
+    next();
+  }
+});
+
+function responseInterceptor(req, res, next) {
+  var originalSend = res.send;
+
+  res.send = function () {
+    let body = arguments[0];
+
+    if (req.method === 'DELETE') {
+      let urlSegms = req.url.split('/');
+      let idStr = urlSegms[urlSegms.length - 1];
+      let id = parseInt(idStr);
+      id = isNaN(id) ? idStr : id;
+
+      let newBody = Object.assign({}, JSON.parse(body));
+      newBody.id = id;
+      arguments[0] = JSON.stringify(newBody);
+    }
+
+    originalSend.apply(res, arguments);
+  };
+
+  next();
+}
+
+server.use(responseInterceptor);
 
 server.use((req, res, next) => {
   if (req.method === 'GET' && req.path === '/meetings' && 
@@ -257,28 +295,8 @@ server.use((req, res, next) => {
     next();
   }
 });
-
-server.use((req, res, next) => {
-  const db = router.db; //lowdb instance
-  const user = db.get('users').find({ email: req.body.email }).value();
-  const valid = !req.body || req.body && !user;
-  if (getBaseRoute(req) === 'users' && req.method === 'POST' && !valid) {
-    res.status(422).json(getError('Email', 'email is already taken', 422, '/data/attributes/email'));
-  }
-  else if (getBaseRoute(req) === 'users' && req.method === 'POST') {
-    const hashedPassword = crypto.createHmac('sha256', hashingSecret).update(req.body.password).digest('hex');
-    req.body.password = hashedPassword;
-    // req.body.passwordConfirmation = hashedPassword;
-    next();
-  }
-  else {
-    // Continue to JSON Server router
-    next();
-  }
-});
-
 // Use default router
-server.use(router)
+server.use(router);
 
 let port = 3000;
 server.listen(port, () => {

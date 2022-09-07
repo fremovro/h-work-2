@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     store: service('store'),
+    currentUser: service(),
 
     init() {
         this._super(...arguments);
@@ -14,7 +15,7 @@ export default Controller.extend({
             let meetingModel = this.get('model');
             if(this.get('meetingEventDate')) {
                 meetingModel.set('eventDate', this.get('meetingEventDate'));
-                console.log(meetingModel);
+                meetingModel.set('user', this.get('currentUser.user'));
                 meetingModel.lectures.forEach(lecture => {
                     lecture.set('date', this.get('meetingEventDate'));
                     lecture.save();

@@ -8,5 +8,6 @@ export default DS.Model.extend({
     tags: DS.attr('array'),
     coverURL: DS.attr('string'),
 
-    lectures: DS.hasMany('lecture')
+    lectures: DS.hasMany('lecture'),
+    user: DS.belongsTo('user')
 });

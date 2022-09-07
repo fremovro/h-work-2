@@ -1,15 +1,13 @@
 import Route from '@ember/routing/route';
 import { set } from '@ember/object';
-import { inject as service } from '@ember/service';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Route.extend({
-    dataService: service('data'),
+export default Route.extend(AuthenticatedRouteMixin, {
     setupController(controller) {
         this._super(...arguments);
         set(controller, 'uploadData', null);
     },
     model({ id }) {
         return this.get('store').findRecord('book', id);
-        // return this.get("dataService").getBook(id);
     }
 });

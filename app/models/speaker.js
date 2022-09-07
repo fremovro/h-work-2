@@ -5,5 +5,6 @@ export default DS.Model.extend({
     surname: DS.attr('string'),
     patronymic: DS.attr('string'),
 
-    lectures: DS.hasMany('lecture')
+    lectures: DS.hasMany('lecture'),
+    user: DS.belongsTo('user')
 });

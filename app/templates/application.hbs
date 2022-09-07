@@ -21,19 +21,25 @@
                 {{#link-to "speaker" class="nav-link"}}Спикеры{{/link-to}}
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="#">Оставить заявку</a>
+                <a class="nav-link text-succes" href="#">Оставить заявку</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-primary" href="#">Запланировать</a>
             </li>
         </ul>
         <ul class="nav navbar-nav">
-            <li class="nav-item">
-                {{#link-to "register" class="nav-link text-info"}}Регистрация{{/link-to}}
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Войти</a>
-            </li>
+            {{#if session.isAuthenticated}}
+                <li class="nav-item">
+                    <button class="nav-link" onclick={{action "logout"}}>Выйти</button>
+                </li>
+            {{else}}
+                <li class="nav-item">
+                    {{#link-to "register" class="nav-link text-info"}}Регистрация{{/link-to}}
+                </li>
+                <li class="nav-item">
+                    {{#link-to "login" class="nav-link"}}Войти{{/link-to}}
+                </li>
+            {{/if}}
         </ul>
     </div>
 </header>

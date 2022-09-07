@@ -1,9 +1,7 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
-import { Promise } from 'rsvp';
-import { later } from '@ember/runloop';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRouteMixin, {
     queryParams: {
         search: {
             refreshModel: false,
@@ -18,12 +16,6 @@ export default Route.extend({
             return this.get('store').query('book', { q: search, tags_like: tags });
         }
         else {
-            // return new Promise((resolve) => {
-            //     later(async () => {
-            //         let books = await this.get("dataService").getBooks(search, tags);
-            //         resolve(books);
-            //     }, 1500);
-            // });
             return this.get('store').findAll("book");
         }
     },
@@ -31,10 +23,5 @@ export default Route.extend({
         reloadModel() {
             this.refresh();
         },
-        // async delBook(book) {
-        //     console.log('2');
-        //     await book.destroyRecord();
-        //     this.get('store').unloadRecord(book);
-        // }
     }
 });

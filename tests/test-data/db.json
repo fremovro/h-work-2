@@ -10,7 +10,8 @@
         "Русская классика",
         "Классическая проза"
       ],
-      "coverURL": "/uploads/cover1__w340-1659880124912.jpg"
+      "coverURL": "/uploads/cover1__w340-1659880124912.jpg",
+      "userId": 1
     },
     {
       "id": 2,
@@ -21,7 +22,8 @@
       "tags": [
         "Зарубежная литература"
       ],
-      "coverURL": "/uploads/large_uk403721-1659524542515.jpg"
+      "coverURL": "/uploads/large_uk403721-1659524542515.jpg",
+      "userId": 1
     },
     {
       "id": 3,
@@ -33,7 +35,8 @@
         "Отечественная классика",
         "Социальная психология"
       ],
-      "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1660224126407.jpg"
+      "coverURL": "/uploads/7444105-evgeniy-zamyatin-my-7444105-1660224126407.jpg",
+      "userId": 1
     },
     {
       "name": "Нужные вещи",
@@ -46,6 +49,7 @@
         "Мистика"
       ],
       "coverURL": "/uploads/18371557-stiven-king-nuzhnye-veschi-18371557-1662010727428.jpg",
+      "userId": 1,
       "id": 4
     },
     {
@@ -59,6 +63,7 @@
         "Контркультура"
       ],
       "coverURL": "/uploads/boocover-1662010945722.jpg",
+      "userId": 1,
       "id": 5
     },
     {
@@ -71,6 +76,7 @@
         "Научно-популярная литература"
       ],
       "coverURL": "/uploads/TheGodDelusion(rus)-1662011245780.jpg",
+      "userId": 1,
       "id": 6
     },
     {
@@ -83,6 +89,7 @@
         "Литература 19 века"
       ],
       "coverURL": "/uploads/images-1662011364495.jpg",
+      "userId": 1,
       "id": 7
     }
   ],
@@ -91,31 +98,43 @@
       "id": 1,
       "name": "Роман",
       "surname": "Ефремов",
-      "patronymic": "Сергеевич"
+      "patronymic": "Сергеевич",
+      "userId": 1
     },
     {
       "id": 2,
       "name": "Кристина",
       "surname": "Ласюкова",
-      "patronymic": "Александровна"
+      "patronymic": "Александровна",
+      "userId": 1
     },
     {
       "name": "Иван",
       "surname": "Быков",
       "patronymic": "Владимирович",
+      "userId": 1,
       "id": 3
     },
     {
       "name": "Сергей",
       "surname": "Сергеев",
       "patronymic": "Сергеевич",
+      "userId": 1,
       "id": 4
     },
     {
       "name": "Фёдор",
       "surname": "Фёдоров",
       "patronymic": "Фёдорович",
+      "userId": 1,
       "id": 5
+    },
+    {
+      "name": "Дмитрий",
+      "surname": "Дмитриев",
+      "patronymic": "Дмитриевич",
+      "userId": 1,
+      "id": 6
     }
   ],
   "lectures": [
@@ -128,6 +147,7 @@
       "bookId": 1,
       "speakerId": 1,
       "meetingId": 1,
+      "userId": 1,
       "id": 1
     },
     {
@@ -139,6 +159,7 @@
       "bookId": 4,
       "speakerId": 2,
       "meetingId": 1,
+      "userId": 1,
       "id": 2
     },
     {
@@ -150,6 +171,7 @@
       "bookId": 2,
       "speakerId": 4,
       "meetingId": 1,
+      "userId": 1,
       "id": 3
     },
     {
@@ -161,6 +183,7 @@
       "bookId": 3,
       "speakerId": 4,
       "meetingId": 2,
+      "userId": 1,
       "id": 4
     },
     {
@@ -172,6 +195,7 @@
       "bookId": 6,
       "speakerId": 5,
       "meetingId": 2,
+      "userId": 1,
       "id": 5
     },
     {
@@ -183,6 +207,7 @@
       "bookId": 2,
       "speakerId": 3,
       "meetingId": 2,
+      "userId": 1,
       "id": 6
     },
     {
@@ -194,6 +219,7 @@
       "bookId": 5,
       "speakerId": 1,
       "meetingId": 3,
+      "userId": 1,
       "id": 7
     },
     {
@@ -205,6 +231,7 @@
       "bookId": 7,
       "speakerId": 5,
       "meetingId": 3,
+      "userId": 1,
       "id": 8
     },
     {
@@ -216,43 +243,37 @@
       "bookId": 4,
       "speakerId": 2,
       "meetingId": 3,
+      "userId": 1,
       "id": 9
     }
   ],
   "meetings": [
     {
       "eventDate": "2022-08-11T19:00:00.000Z",
+      "user": 1,
       "id": 1
     },
     {
       "eventDate": "2022-08-20T19:00:00.000Z",
+      "user": 1,
       "id": 2
     },
     {
       "eventDate": "2022-08-11T19:00:00.000Z",
+      "user": 1,
       "id": 3
     }
   ],
   "users": [
     {
-      "email": "fremov.ro@mail.ru",
-      "password": "44d29319cf9bd232da7a2396099801cf56bd8133391ed39cd068141fae010b1f",
+      "email": "admin",
+      "password": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
       "id": 1
     },
     {
-      "email": "fremov1@mail.ru",
+      "email": "fremov.ro@mail.ru",
       "password": "6762a230543c8b125e59ca28c91a213344d142d4d99d73c9694367dc48cb4955",
       "id": 2
-    },
-    {
-      "email": "fremov.ro2@mail.ru",
-      "password": "6762a230543c8b125e59ca28c91a213344d142d4d99d73c9694367dc48cb4955",
-      "id": 3
-    },
-    {
-      "email": "fremov3@mail.ru",
-      "password": "6762a230543c8b125e59ca28c91a213344d142d4d99d73c9694367dc48cb4955",
-      "id": 4
     }
   ]
 }
