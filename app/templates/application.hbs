@@ -18,7 +18,7 @@
                 {{#link-to "book" class="nav-link"}}Книги{{/link-to}}
             </li>
             <li class="nav-item">
-                {{#link-to "speaker" class="nav-link"}}Спикеры{{/link-to}}
+                {{#link-to "speaker" class="nav-link"}}{{t "menu.speakers"}}{{/link-to}}
             </li>
             <li class="nav-item">
                 <a class="nav-link text-succes" href="#">Оставить заявку</a>
@@ -27,6 +27,14 @@
                 <a class="nav-link text-primary" href="#">Запланировать</a>
             </li>
         </ul>
+
+        <div class="current-user">
+            <select id="languageSelect" onchange={{action "changeLocale"}}>
+                <option value="ru" selected={{isRussian}}>Русский</option>
+                <option value="en" selected={{isEnglish}}>Английский</option>
+            </select>
+        </div>
+
         <ul class="nav navbar-nav">
             {{#if session.isAuthenticated}}
                 <li class="nav-item">

@@ -1,20 +1,53 @@
 import Component from '@ember/component';
 import fetch from 'fetch';
-
+import EmberObject, { get, computed } from '@ember/object';
+import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'h-work-2/config/environment';
 
-export default Component.extend({
+const Validations = buildValidations({
+  email: [
+    validator('ds-error'),
+    validator('presence', true),
+    validator('format', { type: 'email' })
+  ],
+  password: [
+    validator('ds-error'),
+    validator('presence', {
+      presence: true,
+      name: 'bill',
+      surname: 'h',
+      // messageKey: 'key.for.blank'
+      message: Ember.computed('model.{password,i18n.locale}', function () {
+        return '{description} ' + get(this, 'model.i18n').t('errors.blank');
+      }),
+      // message: '{description}',
+      // placeholder: Ember.computed('model.age', 'model.i18n.locale', {
+      //   // inject i18n into your model, optional..
+      //   return get(model, 'i18n').t('age');
+      // })
+    }).create(),
+    validator('length', {
+      min: 4,
+      max: 8
+    })
+  ]
+});
+
+export default Component.extend(Validations, {
   iAmRobot: true,
   reset: false,
+  isFormValid: computed.alias('validations.isValid'),
 
   actions: {
     async saveUser(e) {
       e.preventDefault();
 
-      this.get('onSubmit')({
-        email: this.email,
-        password: this.password,
-      });
+      if (this.get('isFormValid')) {
+        this.get('onSubmit')({
+          email: this.email,
+          password: this.password,
+        });
+      }
     },
 
     async verified(key) {
