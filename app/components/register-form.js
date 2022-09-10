@@ -14,18 +14,10 @@ const Validations = buildValidations({
     validator('ds-error'),
     validator('presence', {
       presence: true,
-      name: 'bill',
-      surname: 'h',
-      // messageKey: 'key.for.blank'
-      message: Ember.computed('model.{password,i18n.locale}', function () {
+      message: computed('model.{password,i18n.locale}', function () {
         return '{description} ' + get(this, 'model.i18n').t('errors.blank');
       }),
-      // message: '{description}',
-      // placeholder: Ember.computed('model.age', 'model.i18n.locale', {
-      //   // inject i18n into your model, optional..
-      //   return get(model, 'i18n').t('age');
-      // })
-    }).create(),
+    }),
     validator('length', {
       min: 4,
       max: 8
