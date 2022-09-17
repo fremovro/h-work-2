@@ -12,6 +12,12 @@ export default Controller.extend({
       }
       catch(e) {
         e.user = newUser;
+        let newLog = this.get('store').createRecord('log', 
+          {currentDate: new Date().toString(),
+          message: e.message,
+          currentURL: window.location.href,
+          ipAdress: '',})
+        newLog.save();
         this.send('error', e);
       }
     },

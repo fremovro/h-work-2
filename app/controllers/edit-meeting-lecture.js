@@ -24,7 +24,7 @@ export default Controller.extend({
                     newVideoURL: undefined,
                     newReview: undefined
                 });
-                this.transitionToRoute('edit-meeting', lectureModel.meeting.get('id'));
+                this.transitionToRoute('add-meeting', lectureModel.meeting.get('id'));
             }
             catch(e) {
                 let newLog = this.get('store').createRecord('log', 

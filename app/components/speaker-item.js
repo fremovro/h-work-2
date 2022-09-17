@@ -7,7 +7,18 @@ export default Component.extend({
 
     actions: {
         async deleteSpeaker(speaker) {
-            this.delSpeaker(speaker);
+            try {
+                this.delSpeaker(speaker);
+            }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         }
     }
 });

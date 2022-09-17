@@ -70,7 +70,7 @@ const getBaseRoute = (req) => {
 
 const isAuthorized = (req) => {
   // const baseRoute = getBaseRoute(req);
-  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token') {
+  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token' || (req.path === '/logs' && req.method === 'POST')) {
     return 200;
   }
 
@@ -136,6 +136,11 @@ server.post('/token', function (req, res) {
     res.status(401).json(getError('Login', 'Error logging in user with that e-mail and password', 401, null));
   }
 });
+
+server.use('/logs', function (req, res, next) {
+  req.body.ipAdress = req.ip;
+  next();
+})
 
 // Check authorization
 server.use((req, res, next) => {

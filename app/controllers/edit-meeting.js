@@ -10,18 +10,29 @@ export default Controller.extend({
 
     actions: {
         async editMeeting() {
-            let meetingModel = this.get('model');
-            if(this.get('meetingEventDate')) {
-                meetingModel.set('eventDate', this.get('meetingEventDate'));
-                meetingModel.lectures.forEach(lecture => {
-                    lecture.set('date', this.get('meetingEventDate'));
-                    lecture.save();
-                });
-            }
-            await meetingModel.save();
+            try {
+                let meetingModel = this.get('model');
+                if(this.get('meetingEventDate')) {
+                    meetingModel.set('eventDate', this.get('meetingEventDate'));
+                    meetingModel.lectures.forEach(lecture => {
+                        lecture.set('date', this.get('meetingEventDate'));
+                        lecture.save();
+                    });
+                }
+                await meetingModel.save();
 
-            this.set('meetingEventDate', undefined);
-            this.transitionToRoute('meeting');
+                this.set('meetingEventDate', undefined);
+                this.transitionToRoute('meeting');
+            }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
         async deleteLecture(lecture) {
             await lecture.destroyRecord();

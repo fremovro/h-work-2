@@ -9,11 +9,31 @@ export default Controller.extend({
 
     actions: {
         updatePage() {
-            this.send("reloadModel");
+            try { this.send("reloadModel"); }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
         async deleteBook(book) {
-            await book.destroyRecord();
-            this.get('store').unloadRecord(book);
+            try {
+                await book.destroyRecord();
+                this.get('store').unloadRecord(book);
+            }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
     }
 });

@@ -1,10 +1,10 @@
 <div class="htop">
-    <h2 class="text-center">Встречи клуба</h2>
+    <h2 class="text-center">{{t "menu.clubsMeetings"}}</h2>
     <div class="form-row navbar-panel justify-content-between align-items-end">
         <div class="col-md-1">
             {{#if (await (can "edit book"))}}
                 {{#link-to "add-meeting" "0"}}
-                    <button class="btn btn-outline-primary my-2" type="button" title="Добавить встречу">
+                    <button class="btn btn-outline-primary my-2" type="button" title={{t "menu.addMeeting"}}>
                         <svg viewBox="0 0 16 16" class="bi bi-plus card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
@@ -13,19 +13,19 @@
             {{/if}}
         </div>
         <div class="col-md-3 align-top">
-            <h5>Спикер</h5>
+            <h5>{{t "menu.speaker"}}</h5>
             {{#power-select id="inputSpeaker" triggerClass="selectpicker form-control dropdown-filter-control" onchange=(action "changeSpeaker") selected=selectedSpeaker options=model.speakers as |speaker|}}
                 {{speaker.name}} {{speaker.surname}}
             {{/power-select}}
         </div>
         <div class="col-md-3">
-            <h5>Книга</h5>
+            <h5>{{t "menu.book"}}</h5>
             {{#power-select id="inputBook" triggerClass="selectpicker form-control dropdown-filter-control" onchange=(action "changeBook") selected=selectedBook options=model.books as |book|}}
                 {{book.name}}
             {{/power-select}}
         </div>
         <div class="col-md-3">
-            <h5>Дата встречи</h5>
+            <h5>{{t "menu.meetingDate"}}</h5>
             {{date-picker}}
             {{!-- <div class="form-group py-2 my-0">
                 <div class="datepicker date input-group p-0 w-100">

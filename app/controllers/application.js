@@ -20,14 +20,35 @@ export default Controller.extend({
 
   actions: {
     async logout(e) {
-      e.preventDefault();
-
-      this.get('session').invalidate();
+      try {
+        e.preventDefault();
+        this.get('session').invalidate();
+      }
+      catch(e) {
+        let newLog = this.get('store').createRecord('log', 
+            {currentDate: new Date().toString(),
+            message: e.message,
+            currentURL: window.location.href,
+            ipAdress: '',})
+        newLog.save();
+        this.send('error', e);
+    }
     },
 
     changeLocale(e) {
-      set(this, 'currentLocale', e.target.value);
-      set(this, 'i18n.locale', get(this, 'currentLocale'));
+      try {
+        set(this, 'currentLocale', e.target.value);
+        set(this, 'i18n.locale', get(this, 'currentLocale'));
+      }
+      catch(e) {
+        let newLog = this.get('store').createRecord('log', 
+            {currentDate: new Date().toString(),
+            message: e.message,
+            currentURL: window.location.href,
+            ipAdress: '',})
+        newLog.save();
+        this.send('error', e);
+    }
     }
   },
 

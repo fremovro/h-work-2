@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('add-meeting-lecture', { path: '/add-meeting-lecture/:id' })
   this.route('register', { path: '/register' });
   this.route('login', { path: '/login' });
+  this.route('edit-meeting-lecture', { path: '/edit-meeting-lecture/:id'});
 });
 
 export default Router;

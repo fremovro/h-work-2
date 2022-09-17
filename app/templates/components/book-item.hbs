@@ -6,9 +6,9 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <div><strong>Автор</strong>: {{book.author}}</div>
-                <div><strong>Количество страниц</strong>: {{book.size}}</div>
-                <div><strong>Теги</strong>: 
+                <div><strong>{{t "menu.author"}}</strong>: {{book.author}}</div>
+                <div><strong>{{t "menu.numberOfPages"}}</strong>: {{book.size}}</div>
+                <div><strong>{{t "menu.tags"}}</strong>: 
                     {{#each book.tags as |tag|}}
                         <a href="#" class="tag-link"><span class="small">#{{tag}}</span></a>
                     {{/each}}
@@ -17,7 +17,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-auto">
-                        Рейтинг:
+                        {{t "menu.rating"}}
                     </div>
                     <div class="col">
                         <div class="progress">

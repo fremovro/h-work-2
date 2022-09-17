@@ -39,11 +39,70 @@ export default {
     passwordDontMatch: 'не совпадают'
   },
   menu: {
-    speakers: 'Спикеры'
+    logo: 'Книжный клуб',
+    speakers: 'Спикеры',
+    workTable: 'Рабочий стол',
+    clubsMeetings: 'Встречи клуба',
+    books: 'Книги',
+    registration: 'Регистрация',
+    register: 'Зарегестрироваться',
+    login: 'Войти',
+    entry: 'Вход',
+    remember: 'Запомнить',
+    logout: 'Выйти',
+    email: 'Почта',
+    password: 'Пароль',
+
+    find: 'Найти',
+    search: 'Поиск',
+    addBook: 'Добавить книгу',
+    addSpeaker: 'Добавить спикера',
+
+    author: 'Автор',
+    numberOfPages: 'Количество страниц',
+    tags: 'Теги',
+    rating: 'Рейтинг:',
+
+    addingBook: 'Добавление книги',
+    addingSpeaker: 'Добавление спикера',
+    name: 'Название',
+    name_2: 'Имя',
+    description: 'Описание',
+    cover: 'Обложка',
+    add: 'Добавить',
+    edit: 'Редактировать',
+    save: 'Сохрнаить',
+    cancel: 'Отмена',
+    select: 'Выбрать',
+
+    editBook: 'Редактировать книгу:',
+    editSpeaker: 'Редактировать спикера:',
+    family: 'Фамилия',
+    patronymic: 'Отчество',
+
+    speaker: 'Спикер',
+    book: 'Книга',
+    addMeeting: 'Добавить встречу',
+    meetingDate: 'Дата встречи',
+    review: 'Отзыв',
+    links: 'Ссылки',
+    listOfReports: 'Список докладов',
+    viewReport: 'Посмотреть запись доклада',
+    downloadPresentation: 'Скачать презентацию',
+    date: 'Дата...',
+
+    addReport: 'Добавить доклад',
+    reportAddition: 'Добавление доклада',
+    reportDate: 'Дата доклада',
+    bookRating: 'Оценка книги',
+    presentationURL: 'URL презентации',
+    videoURL: 'URL видео',
+    inputPURL: 'Input URL of presentation',
+    inputVURL: 'Input URL of video',
+    inputRating: 'Input rating',
+    inputReview: 'Input review',
+
+    editMeeting: 'Редактирование встречи',
+    editReport: 'Редактирование доклада',
   },
-  key: {
-    for: {
-      blank: "{{description}} должно быть заполнено",
-    }
-  }
 };

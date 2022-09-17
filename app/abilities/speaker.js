@@ -13,7 +13,7 @@ export default Ability.extend({
       return false;
     }
     return new Promise((resolve, reject) => {
-        this.get('currentUser.user.email') === 'admin' ? resolve(true) : reject(false);
+        this.get('currentUser.user.email') === 'admin@mail.ru' ? resolve(true) : reject(false);
     //   return this.get('model.user').then((user) => {
     //     resolve(user.get('email') === this.get('currentUser.user.email'));
     //   }).catch(() => {

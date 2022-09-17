@@ -3,6 +3,7 @@ import fetch from 'fetch';
 import EmberObject, { get, computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'h-work-2/config/environment';
+import { inject as service } from '@ember/service';
 
 const Validations = buildValidations({
   email: [
@@ -14,18 +15,10 @@ const Validations = buildValidations({
     validator('ds-error'),
     validator('presence', {
       presence: true,
-      name: 'bill',
-      surname: 'h',
-      // messageKey: 'key.for.blank'
-      message: Ember.computed('model.{password,i18n.locale}', function () {
-        return '{description} ' + get(this, 'model.i18n').t('errors.blank');
-      }),
-      // message: '{description}',
-      // placeholder: Ember.computed('model.age', 'model.i18n.locale', {
-      //   // inject i18n into your model, optional..
-      //   return get(model, 'i18n').t('age');
-      // })
-    }).create(),
+      // message: computed('model.{i18n.locale}', function () {
+      //   return '{description} ' + get(this, 'model.i18n').t('errors.blank');
+      // }),
+    }),
     validator('length', {
       min: 4,
       max: 8
@@ -36,17 +29,29 @@ const Validations = buildValidations({
 export default Component.extend(Validations, {
   iAmRobot: true,
   reset: false,
+  i18n: service(),
   isFormValid: computed.alias('validations.isValid'),
 
   actions: {
     async saveUser(e) {
-      e.preventDefault();
+      try {
+        e.preventDefault();
 
-      if (this.get('isFormValid')) {
-        this.get('onSubmit')({
-          email: this.email,
-          password: this.password,
-        });
+        if (this.get('isFormValid')) {
+          this.get('onSubmit')({
+            email: this.email,
+            password: this.password,
+          });
+        }
+      }
+      catch(e) {
+        let newLog = this.get('store').createRecord('log', 
+          {currentDate: new Date().toString(),
+          message: e.message,
+          currentURL: window.location.href,
+          ipAdress: '',})
+        newLog.save();
+        this.send('error', e);
       }
     },
 

@@ -266,11 +266,67 @@
     {
       "eventDate": null,
       "id": 4
+    },
+    {
+      "eventDate": null,
+      "id": 5
+    },
+    {
+      "eventDate": null,
+      "id": 6
+    },
+    {
+      "eventDate": null,
+      "id": 7
+    },
+    {
+      "eventDate": null,
+      "id": 8
+    },
+    {
+      "eventDate": null,
+      "id": 9
+    },
+    {
+      "eventDate": null,
+      "id": 10
+    },
+    {
+      "eventDate": null,
+      "id": 11
+    },
+    {
+      "eventDate": null,
+      "id": 12
+    },
+    {
+      "eventDate": null,
+      "id": 13
+    },
+    {
+      "eventDate": null,
+      "id": 14
+    },
+    {
+      "eventDate": null,
+      "id": 15
+    },
+    {
+      "eventDate": null,
+      "id": 16
+    },
+    {
+      "eventDate": null,
+      "id": 17
+    },
+    {
+      "eventDate": null,
+      "id": 18
     }
   ],
   "users": [
     {
-      "email": "admin",
+      "email": "admin@mail.ru",
       "password": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
       "id": 1
     },
@@ -278,6 +334,153 @@
       "email": "fremov.ro@mail.ru",
       "password": "6762a230543c8b125e59ca28c91a213344d142d4d99d73c9694367dc48cb4955",
       "id": 2
+    },
+    {
+      "email": "test@test.com",
+      "password": "6de069e7b4fe10d5515cfc66178e09e2830cf4e24447c908843dd8a62c9f1268",
+      "id": 3
+    }
+  ],
+  "logs": [
+    {
+      "currentDate": "Wed Sep 14 2022 12:16:43 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/register",
+      "message": "Assertion Failed: EmberObject.create no longer supports defining computed properties. Define computed properties using extend() or reopen() before calling create().",
+      "id": 1
+    },
+    {
+      "currentDate": "Wed Sep 14 2022 12:26:48 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/register",
+      "message": "Assertion Failed: EmberObject.create no longer supports defining computed properties. Define computed properties using extend() or reopen() before calling create().",
+      "id": 2
+    },
+    {
+      "currentDate": "Wed Sep 14 2022 12:27:26 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/register",
+      "message": "Assertion Failed: EmberObject.create no longer supports defining computed properties. Define computed properties using extend() or reopen() before calling create().",
+      "id": 3
+    },
+    {
+      "currentDate": "Wed Sep 14 2022 17:42:51 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/register",
+      "message": "Assertion Failed: EmberObject.create no longer supports defining computed properties. Define computed properties using extend() or reopen() before calling create().",
+      "id": 4
+    },
+    {
+      "currentDate": "Wed Sep 14 2022 18:26:00 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/login",
+      "message": null,
+      "id": 5
+    },
+    {
+      "currentDate": "Wed Sep 14 2022 20:14:13 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/books",
+      "message": "joinArguments is not defined",
+      "id": 6
+    },
+    {
+      "currentDate": "Thu Sep 15 2022 10:22:47 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-meeting-lecture/7",
+      "message": "Assertion Failed: {{power-select}} If you want the default filtering to work on options that are not plain strings, you need to provide `searchField`",
+      "id": 7
+    },
+    {
+      "currentDate": "Thu Sep 15 2022 11:06:03 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-meeting/5",
+      "message": "Assertion Failed: You attempted to define a `{{link-to \"edit-meeting-lecture\"}}` but did not pass the parameters required for generating its dynamic segments. More context objects were passed than there are dynamic segments for the route: edit-meeting-lecture",
+      "id": 8
+    },
+    {
+      "currentDate": "Thu Sep 15 2022 11:07:38 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-lecture/6",
+      "message": "Assertion Failed: {{power-select}} If you want the default filtering to work on options that are not plain strings, you need to provide `searchField`",
+      "id": 9
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:29:24 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/speakers",
+      "message": "Assertion Failed: You attempted to define a `{{link-to \"edit-speaker\"}}` but did not pass the parameters required for generating its dynamic segments. Cannot read properties of undefined (reading 'get')",
+      "id": 10
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:29:40 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/speakers",
+      "message": "Assertion Failed: You attempted to define a `{{link-to \"edit-speaker\"}}` but did not pass the parameters required for generating its dynamic segments. Cannot read properties of undefined (reading 'get')",
+      "id": 11
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:31:01 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/speakers",
+      "message": "Assertion Failed: You attempted to define a `{{link-to \"edit-speaker\"}}` but did not pass the parameters required for generating its dynamic segments. Cannot read properties of undefined (reading 'get')",
+      "id": 12
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:31:31 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/speakers",
+      "message": "Assertion Failed: You attempted to define a `{{link-to \"edit-speaker\"}}` but did not pass the parameters required for generating its dynamic segments. Cannot read properties of undefined (reading 'get')",
+      "id": 13
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:44:18 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 14
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 12:45:07 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 15
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 13:27:18 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 16
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 13:39:22 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 17
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 13:56:46 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 18
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 13:57:49 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 19
+    },
+    {
+      "currentDate": "Fri Sep 16 2022 13:58:23 GMT+0500 (Екатеринбург, стандартное время)",
+      "ipAdress": "::1",
+      "currentURL": "http://localhost:4200/add-book",
+      "message": "joinArguments is not defined",
+      "id": 20
     }
   ]
 }

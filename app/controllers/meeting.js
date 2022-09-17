@@ -35,31 +35,69 @@ export default Controller.extend({
 
     actions: {
         async deleteMeeting(meeting) {
-            let temp = meeting; let temp2 =[], temp3=[];
+            try {
+                let temp = meeting; let temp2 =[], temp3=[];
 
-            temp.get('lectures').toArray().forEach(lecture => {
-                temp2.push(lecture);
-                const promise = lecture.destroyRecord();
-                temp3.push(promise);
-            });
-            await RSVP.all(temp3);
-            temp2.forEach(lecture => {
-                this.get('store').unloadRecord(lecture);
-            })
-            await meeting.destroyRecord();
-            this.get('store').unloadRecord(meeting);
+                temp.get('lectures').toArray().forEach(lecture => {
+                    temp2.push(lecture);
+                    const promise = lecture.destroyRecord();
+                    temp3.push(promise);
+                });
+                await RSVP.all(temp3);
+                temp2.forEach(lecture => {
+                    this.get('store').unloadRecord(lecture);
+                })
+                await meeting.destroyRecord();
+                this.get('store').unloadRecord(meeting);
+            }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
 
         changeSpeaker(speaker) {
-            this.set('speaker', speaker ? speaker.get('id') : '');
+            try { this.set('speaker', speaker ? speaker.get('id') : ''); }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
 
         changeBook(book) {
-            this.set('book', book ? book.get('id') : '');
+            try { this.set('book', book ? book.get('id') : ''); }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
 
         changeDate(date) {
-            this.set('date', date ? date.get('id') : '');
+            try { this.set('date', date ? date.get('id') : ''); }
+            catch(e) {
+                let newLog = this.get('store').createRecord('log', 
+                    {currentDate: new Date().toString(),
+                    message: e.message,
+                    currentURL: window.location.href,
+                    ipAdress: '',})
+                newLog.save();
+                this.send('error', e);
+            }
         },
 
         updatePage() {

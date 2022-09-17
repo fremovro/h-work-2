@@ -12,7 +12,7 @@ export default Component.extend({
   }),
 
   fileName: computed('isFileChoosen', function () {
-    return this.get('isFileChoosen') ? this.get('uploadData').files[0].name : 'Выберите файл';
+    return this.get('isFileChoosen') ? this.get('uploadData').files[0].name : "";
   }),
 
   didInsertElement() {

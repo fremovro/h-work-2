@@ -38,11 +38,70 @@ export default {
     passwordDontMatch: 'do not match'
   },
   menu: {
-    speakers: 'Speakers'
+    logo: 'Books club',
+    speakers: 'Speakers',
+    workTable: 'Work table',
+    clubsMeetings: 'Club`s meetings',
+    books: 'Books',
+    registration: 'Registration',
+    register: 'Register',
+    login: 'Login',
+    entry: 'Entry',
+    remember: 'Remember',
+    logout: 'Logout',
+    email: 'Email',
+    password: 'Password',
+
+    find: 'Find',
+    search: 'Search',
+    addBook: 'Add book',
+    addSpeaker: 'Add speaker',
+
+    author: 'Author',
+    numberOfPages: 'Number of pages',
+    tags: 'Tags',
+    rating: 'Rating:',
+
+    addingBook: 'Adding book',
+    addingSpeaker: 'Adding speaker',
+    name: 'Name',
+    name_2: 'Name',
+    description: 'Description',
+    cover: 'Cover',
+    add: 'Add',
+    edit: 'Edit',
+    save: 'Save',
+    cancel: 'Cancel',
+    select: 'Select',
+
+    editBook: 'Edit book:',
+    editSpeaker: 'Edit speaker:',
+    family: 'Surname',
+    patronymic: 'Patronymic',
+
+    speaker: 'Speaker',
+    book: 'Book',
+    addMeeting: 'Add meeting',
+    meetingDate: 'Meeting date',
+    review: 'Review',
+    links: 'Links',
+    listOfReports: 'List of reports',
+    viewReport: 'View the recording of the report',
+    downloadPresentation: 'Download presentation',
+    date: 'Date...',
+    
+    addReport: 'Add report',
+    reportAddition: 'Report addition',
+    reportDate: 'Report date',
+    bookRating: 'Book rating',
+    presentationURL: 'Presentation URL',
+    videoURL: 'Video URL',
+    inputPURL: 'Input URL of presentation',
+    inputVURL: 'Input URL of video',
+    inputRating: 'Input rating',
+    inputReview: 'Input review',
+
+    editMeeting: 'Meeting edditing',
+    editReport: 'Report edditing',
   },
-  key: {
-    for: {
-      blank: "{{description}} can't be blank",
-    }
-  }
 };

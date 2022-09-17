@@ -1,22 +1,23 @@
 <form onsubmit={{action "saveUser"}}>
   <img class="mb-4" src="images/logo-dark.png" alt="" height="57">
-  <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+  <h1 class="h3 mb-3 fw-normal">{{t "menu.registration"}}</h1>
 
+  {{#if (v-get this 'email' 'isInvalid')}}
+    <span class="error-message">
+      {{v-get this 'email' 'message'}}
+    </span>
+  {{/if}}
   <div class="form-floating">
-    {{input class="form-control" type="text" placeholder="Email" value=email}}
-    {{#if (v-get this 'email' 'isInvalid')}}
-      <span class="error-message">
-        {{v-get this 'email' 'message'}}
-      </span>
-    {{/if}}
+    {{input class="form-control" type="text" placeholder=(t "menu.email") value=email}}
   </div>
+
+  {{#if (v-get this 'password' 'isInvalid')}}
+    <span class="error-message">
+      {{v-get this 'password' 'message'}}
+    </span>
+  {{/if}}
   <div class="form-floating">
-    {{input class="form-control" type="password" placeholder="Password" value=password}}
-    {{#if (v-get this 'password' 'isInvalid')}}
-      <span class="error-message">
-        {{v-get this 'password' 'message'}}
-      </span>
-    {{/if}}
+    {{input class="form-control" type="password" placeholder=(t "menu.password") value=password}}
   </div>
 
   <div class="field">
@@ -27,6 +28,6 @@
     }}
   </div>
 
-  <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" disabled={{iAmRobot}}>Зарегистрироваться</button>
-  {{#link-to "index"}}Назад{{/link-to}}
+  <button class="w-100 btn btn-lg btn-primary mb-3" type="submit" disabled={{iAmRobot}}>{{t "menu.register"}}</button>
+  {{!-- {{#link-to "index"}}Назад{{/link-to}} --}}
 </form>
