@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
-import { get, set } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 

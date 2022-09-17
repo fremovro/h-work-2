@@ -16,6 +16,11 @@
                             </span>
                         </div>
                     </div>
+                    {{#if (v-get this 'meetingEventDate' 'isInvalid')}}
+                        <span class="error-message">
+                            {{v-get this 'meetingEventDate' 'message'}}
+                        </span>
+                    {{/if}}
                 </div>
             </div>
             <div class="row h-100 justify-content-between">

@@ -41,6 +41,11 @@
                 {{#power-select id="inputBook" triggerClass="selectpicker form-control form-control-lg" onchange=(action (mut newBook)) selected=newBook options=model.books as |book|}}
                     {{book.name}}
                 {{/power-select}}
+                {{#if (v-get this 'newBook' 'isInvalid')}}
+                    <span class="error-message">
+                        {{v-get this 'newBook' 'message'}}
+                    </span>
+                {{/if}}
             </div>					
         </div>
         <div class="form-group row">
@@ -49,6 +54,11 @@
                 {{#power-select id="inputSpeaker" triggerClass="selectpicker form-control form-control-lg" onchange=(action (mut newSpeaker)) selected=newSpeaker options=model.speakers as |speaker|}}
                     {{speaker.name}} {{speaker.surname}}
                 {{/power-select}}
+                {{#if (v-get this 'newSpeaker' 'isInvalid')}}
+                    <span class="error-message">
+                        {{v-get this 'newSpeaker' 'message'}}
+                    </span>
+                {{/if}}
             </div>						
         </div>
         <div class="form-group row">
